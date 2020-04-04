@@ -46,3 +46,10 @@ span.recovered-cases {
 span.death-cases {
     color: #606060;
 }
+
+
+.summary {
+    width: 100%;
+    padding: 10px;
+    margin: 0 auto;
+}
