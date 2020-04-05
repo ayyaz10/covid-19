@@ -1,10 +1,11 @@
-const xhr = new XMLHttpRequest();
+const globalXhr = new XMLHttpRequest();
 
 // fetching confirmed, recovered and total deaths
-xhr.open('GET', 'https://covid19.mathdro.id/api', true);
+globalXhr.open('GET', 'https://covid19.mathdro.id/api', true);
 
-xhr.onload = ()=>{
-    const response = JSON.parse(xhr.responseText);
+globalXhr.onload = ()=>{
+    const response = JSON.parse(globalXhr.responseText);
+    // console.log(response);
     const totalConfirmed = document.getElementsByClassName('confirmed-cases')[0].innerHTML = response.confirmed.value;
     const totalRecovered = document.getElementsByClassName('recovered-cases')[0].innerHTML = response.recovered.value;
     const totalDeaths = document.getElementsByClassName('death-cases')[0].innerHTML = response.deaths.value;
@@ -12,4 +13,18 @@ xhr.onload = ()=>{
     document.getElementsByClassName('closed-cases')[0].innerHTML = totalRecovered + totalDeaths;
 }
 
-xhr.send();
+globalXhr.send();
+
+
+// fetching details country vise
+const countriesXhr = new XMLHttpRequest();
+
+countriesXhr.open('GET', 'https://covid19.mathdro.id/api/confirmed', true);
+countriesXhr.onload = () => {
+    const response = JSON.parse(countriesXhr.responseText);
+    response.forEach(country => {
+       
+    });
+}
+
+countriesXhr.send();

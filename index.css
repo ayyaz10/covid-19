@@ -16,7 +16,12 @@ header {
     font-weight: 800;
     font-size: 40px;
 }
-h1, h2 {
+
+h1 {
+    font-size: 3rem;
+}
+
+h1, h2, h5 {
     text-align: center;
 }
 
@@ -49,7 +54,5 @@ span.death-cases {
 
 
 .summary {
-    /* width: 100%;
-    padding: 10px;
-    margin: 0 auto; */
+text-align: center;
 }
