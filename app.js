@@ -22,9 +22,20 @@ const countriesXhr = new XMLHttpRequest();
 countriesXhr.open('GET', 'https://covid19.mathdro.id/api/confirmed', true);
 countriesXhr.onload = () => {
     const response = JSON.parse(countriesXhr.responseText);
+    let output = '';
     response.forEach(country => {
-       
+       output += 
+       `<tr>
+            <td>${country.countryRegion}</td>
+            <td>${country.confirmed}</td>
+            <td>${country.recovered}</td>
+            <td>${country.deaths}</td>  
+            </br>
+        </tr>`
     });
+    
+    document.querySelector('.fetch-content').innerHTML = output;
+
 }
 
 countriesXhr.send();

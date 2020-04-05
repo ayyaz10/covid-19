@@ -56,3 +56,7 @@ span.death-cases {
 .summary {
 text-align: center;
 }
+
+table {
+    margin-top: 100px;
+}
