@@ -1,31 +1,35 @@
 
 
 // fetching confirmed, recovered and total deaths
-fetch('https://covid19.mathdro.id/api').then((response) => {
+fetch('http://api.coronastatistics.live/all').then((response) => {
     return response.json();
 }).then((data) => {
-    // console.log(data)
-    // console.log(data.recovered.value)
-    const totalConfirmed = document.getElementsByClassName('confirmed-cases')[0].innerHTML = data.confirmed.value;
-    const totalRecovered = document.getElementsByClassName('recovered-cases')[0].innerHTML = data.recovered.value;
-    const totalDeaths = document.getElementsByClassName('death-cases')[0].innerHTML = data.deaths.value;
+    const totalConfirmed = document.getElementsByClassName('confirmed-cases')[0].innerHTML = data.cases;
+    const totalRecovered = document.getElementsByClassName('recovered-cases')[0].innerHTML = data.recovered;
+    const totalDeaths = document.getElementsByClassName('death-cases')[0].innerHTML = data.deaths;
     document.getElementsByClassName('active-cases')[0].innerHTML = totalConfirmed - (totalRecovered + totalDeaths);
     document.getElementsByClassName('closed-cases')[0].innerHTML = totalRecovered + totalDeaths;
 
-    fetch(`${data.confirmed.detail}`).then((response)=>{
-        return response.json();
-        })
-        .then((response) => {
-            let countries = [];
-            for(let i=0; i < response.length; i++){
-             countries.push(response[i].countryRegion.toLowerCase());
-        }
-        // console.log(countries)
-        function removeDuplicates(countries) {
-            let count = countries.filter((a, b) => countries.indexOf(a) === b)
-            console.log(count)
-          };
-          removeDuplicates(countries)
+})
+
+fetch('http://api.coronastatistics.live/countries').then((response) => {
+    return response.json();
+}).then((data) => {
+    let output = '';
+    data.forEach((covid) => {
+        console.log(typeof(covid.country))
+        output +=
+            `
+            <tr>
+                <td>${covid.country}</td>
+                <td>${covid.cases}</td>
+                <td>${covid.recovered}</td>
+                <td>${covid.deaths}</td>
+            </tr>
+            `
+    })
+          document.querySelector('.fetch-content').innerHTML = output;
+})
             // switch(response.countryRegion) {
 
             // }
@@ -78,12 +82,11 @@ fetch('https://covid19.mathdro.id/api').then((response) => {
         // `
     
             //   document.querySelector('.fetch-content').innerHTML = output;
-       })
+
     //    fetch(`${data.recovered.detail}`).then((recoveredRes)=>{
     //     return recoveredRes.json();
     //     }).then((recoveredRes) => {
     //         console.log(recoveredRes)
     //     })
 
-    })  
 
