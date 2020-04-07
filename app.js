@@ -12,31 +12,78 @@ fetch('https://covid19.mathdro.id/api').then((response) => {
     document.getElementsByClassName('active-cases')[0].innerHTML = totalConfirmed - (totalRecovered + totalDeaths);
     document.getElementsByClassName('closed-cases')[0].innerHTML = totalRecovered + totalDeaths;
 
-    fetch(`${data.deaths.detail}`).then((response)=>{
+    fetch(`${data.confirmed.detail}`).then((response)=>{
         return response.json();
         })
         .then((response) => {
-            let usDeaths = 0;
-            let usConfirmed = 0;
-            let usRecovered = 0;
-            let output = '';
-            const result = response.forEach((res, i)=>{
-                if(res.countryRegion.toLowerCase() === "us") {
-                    usConfirmed = usConfirmed + res.confirmed;  
-                    usRecovered = usRecovered + res.recovered;  
-                    usDeaths = usDeaths + res.deaths;  
-                }
-        })
-            output += 
-                `<tr>
-                    <td>US</td>
-                    <td>${usConfirmed}</td>
-                    <td>${usRecovered}</td>
-                    <td>${usDeaths}</td>
-                    </br>
-                </tr>`;
+            let countries = [];
+            for(let i=0; i < response.length; i++){
+             countries.push(response[i].countryRegion.toLowerCase());
+        }
+        // console.log(countries)
+        function removeDuplicates(countries) {
+            let count = countries.filter((a, b) => countries.indexOf(a) === b)
+            console.log(count)
+          };
+          removeDuplicates(countries)
+            // switch(response.countryRegion) {
+
+            // }
+        //     // let usDeaths = 0;
+        //     let usConfirmed = 0;
+        //     let franceConfirmed = 0;
+        //     let thatCconfirmed = 0;
+        //     let output = '';
+        //     let array = "";
+        //     const result = response.map((data)=>{
+        //         array = data.countryRegion;
+        //         return array;
+        //     })
+        //     response.forEach((res, i)=>{
+        //         if(res.countryRegion.toLowerCase() === "result") {
+        //             // usConfirmed = usConfirmed + res.confirmed;  
+        //             // usRecovered = usRecovered + res.recovered;  
+        //             usConfirmed = usConfirmed + res.confirmed;  
+
+                   
+
+
+        //         } else if(res.countryRegion.toLowerCase()=== "result"){
+        //             thatCconfirmed += thatCconfirmed +res.confirmed;
+                
+        //     }
+        //          else {
+        //             output += 
+        //             `<tr>
+        //                 <td>${res.countryRegion}</td>
+        //                 <td>${res.confirmed}</td>
+        //                 </br>
+        //             </tr>
+        //             <tr>
+        //             </tr>
+        //             `
+        //         }
+        // })
+        // output += 
+        // `<tr>
+        //     <td>US</td>
+        //     <td>${usConfirmed}</td>
+        //     </br>
+        // </tr>
+        // <tr>
+        //     <td>France</td>
+
+        //     </br>
+        // </tr>
+        // `
     
-              document.querySelector('.fetch-content').innerHTML = output;
+            //   document.querySelector('.fetch-content').innerHTML = output;
        })
+    //    fetch(`${data.recovered.detail}`).then((recoveredRes)=>{
+    //     return recoveredRes.json();
+    //     }).then((recoveredRes) => {
+    //         console.log(recoveredRes)
+    //     })
+
     })  
 
