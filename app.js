@@ -16,15 +16,46 @@ fetch('http://api.coronastatistics.live/countries').then((response) => {
     return response.json();
 }).then((data) => {
     let output = '';
+    // sort by country
+    // data.sort(function(a, b){
+    //     var nameA=a.country, nameB=b.country; 
+    //     if (nameA < nameB) //sort string ascending
+    //         return -1 
+    //     if (nameA > nameB)
+    //         return 1
+    //     return 0 //default return value (no sorting)
+  
+    // })
+    // .addEventListener
+    data.sort(function(a, b){
+        return b.cases - a.cases;
+    })
+  
     data.forEach((covid) => {
-        console.log(typeof(covid.country))
+
+        // adding '+' sign to new to today new cases and today new deaths
+        function addPlus(input){
+            if(input === 0){
+                input = " ";
+                return input;
+            } else {
+                input += "+";
+                return input;
+            }
+        }
+
+        const todayCases = addPlus(covid.todayCases)
+        const todayDeaths = addPlus(covid.todayDeaths)
+        console.log(typeof(todayCases))
         output +=
             `
             <tr>
                 <td>${covid.country}</td>
                 <td>${covid.cases}</td>
-                <td>${covid.recovered}</td>
+                <td>${todayCases}</td>
                 <td>${covid.deaths}</td>
+                <td>${todayDeaths}</td>
+                <td>${covid.recovered}</td>
             </tr>
             `
     })
