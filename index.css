@@ -9,7 +9,7 @@ a:hover {
 }
 
 a::after{
-    content: '▼▲';
+    content: '\25b4 \25be';
     margin-left: 10px;
 }
 header {

@@ -1,37 +1,37 @@
 
 
+const tBody = document.querySelector('.fetch-content')
 // fetching confirmed, recovered and total deaths
-fetch('http://api.coronastatistics.live/all').then((response) => {
-    return response.json();
-}).then((data) => {
-    const totalConfirmed = document.getElementsByClassName('confirmed-cases')[0].innerHTML = data.cases;
-    const totalRecovered = document.getElementsByClassName('recovered-cases')[0].innerHTML = data.recovered;
-    const totalDeaths = document.getElementsByClassName('death-cases')[0].innerHTML = data.deaths;
-    document.getElementsByClassName('active-cases')[0].innerHTML = totalConfirmed - (totalRecovered + totalDeaths);
-    document.getElementsByClassName('closed-cases')[0].innerHTML = totalRecovered + totalDeaths;
-
-})
-
-fetch('http://api.coronastatistics.live/countries').then((response) => {
-    return response.json();
-}).then((data) => {
-    let output = '';
-    // sort by country
-    // data.sort(function(a, b){
-    //     var nameA=a.country, nameB=b.country; 
-    //     if (nameA < nameB) //sort string ascending
-    //         return -1 
-    //     if (nameA > nameB)
-    //         return 1
-    //     return 0 //default return value (no sorting)
-  
-    // })
-    // .addEventListener
-    data.sort(function(a, b){
-        return b.cases - a.cases;
+function fetchApiData(){
+        fetch('http://api.coronastatistics.live/all').then((response) => {
+        return response.json();
+    }).then((data) => {
+        const totalConfirmed = document.getElementsByClassName('confirmed-cases')[0].innerHTML = data.cases;
+        const totalRecovered = document.getElementsByClassName('recovered-cases')[0].innerHTML = data.recovered;
+        const totalDeaths = document.getElementsByClassName('death-cases')[0].innerHTML = data.deaths;
+        document.getElementsByClassName('active-cases')[0].innerHTML = totalConfirmed - (totalRecovered + totalDeaths);
+        document.getElementsByClassName('closed-cases')[0].innerHTML = totalRecovered + totalDeaths;
     })
-  
-    data.forEach((covid) => {
+
+        fetch('http://api.coronastatistics.live/countries').then(response => {
+            return response.json();
+        })
+        .then(data => {
+            populateCountryData(data);
+        })
+        .catch((e) => {
+            console.log(`opps ${e}`)
+        })
+    }
+
+    function populateCountryData(data){
+    //     function sortByCases(data){
+    //     data.sort(function(a, b){
+    //         return b.cases - a.cases;
+    //     })
+    // }
+        console.log(tBody)
+        data.forEach(covid => {
 
         // adding '+' sign to new to today new cases and today new deaths
         function addPlus(input){
@@ -44,24 +44,18 @@ fetch('http://api.coronastatistics.live/countries').then((response) => {
             }
         }
 
-        const todayCases = addPlus(covid.todayCases)
-        const todayDeaths = addPlus(covid.todayDeaths)
-        console.log(typeof(todayCases))
-        output +=
-            `
-            <tr>
-                <td>${covid.country}</td>
-                <td>${covid.cases}</td>
-                <td>${todayCases}</td>
-                <td>${covid.deaths}</td>
-                <td>${todayDeaths}</td>
-                <td>${covid.recovered}</td>
-            </tr>
-            `
-    })
-          document.querySelector('.fetch-content').innerHTML = output;
-})
-            // switch(response.countryRegion) {
+        const todayCases = addPlus(covid.todayCases);
+        const todayDeaths = addPlus(covid.todayDeaths);
+        // console.log(sortByCases(data))
+
+    });  
+}  
+
+
+document.addEventListener('DOMContentLoaded', ()=>{fetchApiData(); });
+
+
+          // switch(response.countryRegion) {
 
             // }
         //     // let usDeaths = 0;
@@ -121,3 +115,36 @@ fetch('http://api.coronastatistics.live/countries').then((response) => {
     //     })
 
 
+
+
+    // function sortTableByColumn(table, column, asc = "true"){
+    //     const dirModifier = asc ? 1 : -1;
+    //     const tBody = table.tBodies [0];
+    //     const rows = Array.from(tBody.querySelectorAll('tr'))
+    //     console.log(rows)
+    //     const sortedRow = rows.sort((a, b) => { 
+    //       console.log(a)
+    //       console.log(b)
+    //   })   
+    //    sortTableByColumn(document.querySelector("table"), 1)   
+    // }
+
+
+        // output +=
+        //     `
+        //     <tr>
+        //         <td>${covid.country}</td>
+        //         <td>${covid.cases}</td>
+        //         <td>${todayCases}</td>
+        //         <td>${covid.deaths}</td>
+        //         <td>${todayDeaths}</td>
+        //         <td>${covid.recovered}</td>
+        //         <td>${covid.active}</td>
+        //         <td>${covid.critical}</td>
+        //         <td>${covid.casesPerOneMillion}</td>
+        //         <td>${covid.deathsPerOneMillion}</td>
+        //     </tr>
+
+        //     `
+
+       //   document.querySelector('.fetch-content').innerHTML = output;
