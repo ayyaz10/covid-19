@@ -19,9 +19,9 @@ function fetchApiData(){
         .then(data => {
             populateCountryData(data);
         })
-        .catch((e) => {
-            console.log(`opps ${e}`)
-        })
+        // .catch((e) => {
+        //     // console.log(`opps ${e}`)
+        // })
     }
 
     function populateCountryData(data){
@@ -30,9 +30,11 @@ function fetchApiData(){
     //         return b.cases - a.cases;
     //     })
     // }
-        console.log(tBody)
-        data.forEach(covid => {
 
+     
+
+        data.forEach(covid => {
+            const tr = document.createElement('tr');   
         // adding '+' sign to new to today new cases and today new deaths
         function addPlus(input){
             if(input === 0){
@@ -43,7 +45,66 @@ function fetchApiData(){
                 return input;
             }
         }
+        function createTd(){
+            return document.createElement('td');
+        }
+        const countriesCell = createTd();
+        const totalCasesCell = createTd();
+        const todayCasesCell = createTd();
+        const totalDeathsCell = createTd();
+        const todayDeathsCell = createTd();
+        const totalRecoveredCell = createTd();
+        const activeCell = createTd();
+        const criticalCell = createTd();
+        const casesPerMillionCell = createTd();
+        const deathsPerMillionCell = createTd();
 
+        // const td1 = document.createElement('td')
+        countriesCell.textContent = covid.country;
+        totalCasesCell.textContent = covid.cases;
+        todayCasesCell.textContent = covid.todayCases;
+        totalDeathsCell.textContent = covid.deaths;
+        todayDeathsCell.textContent = covid.todayDeaths;
+        totalRecoveredCell.textContent = covid.recovered;
+        activeCell.textContent = covid.active;
+        criticalCell.textContent = covid.critical;
+        casesPerMillionCell.textContent = covid.casesPerOneMillion;
+        deathsPerMillionCell.textContent = covid.deathsPerOneMillion;
+
+
+        tr.appendChild(countriesCell)
+        tr.appendChild(totalCasesCell)
+        tr.appendChild(todayCasesCell)
+        tr.appendChild(totalDeathsCell)
+        tr.appendChild(todayDeathsCell)
+        tr.appendChild(totalRecoveredCell)
+        tr.appendChild(activeCell)
+        tr.appendChild(criticalCell)
+        tr.appendChild(casesPerMillionCell)
+        tr.appendChild(deathsPerMillionCell)
+        
+        // createTd().textContent = covid.country;
+        // createTd().textContent = covid.cases;
+        console.log(createTd())
+
+        // tr.appendChild(createTd())
+
+        // console.log(createTd())
+        // const td2 = document.createElement('td');
+        // const td3 = document.createElement('td');
+        // td.textContent = covid.country;
+        // td2.textContent = covid.cases;
+        // td3.textContent = covid.todayCases;
+        // console.log(covid)
+       
+        
+        // tr.appendChild(td);
+        // tr.appendChild(td2);
+        // tr.appendChild(td3);
+        tBody.appendChild(tr);
+        
+        // console.log(covid.country)
+        
         const todayCases = addPlus(covid.todayCases);
         const todayDeaths = addPlus(covid.todayDeaths);
         // console.log(sortByCases(data))
@@ -52,7 +113,7 @@ function fetchApiData(){
 }  
 
 
-document.addEventListener('DOMContentLoaded', ()=>{fetchApiData(); });
+document.addEventListener('DOMContentLoaded', () => { fetchApiData(); });
 
 
           // switch(response.countryRegion) {
