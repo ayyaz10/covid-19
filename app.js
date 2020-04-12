@@ -24,82 +24,85 @@ function fetchApiData(){
         // })
     }
 
-    function populateCountryData(data){
-    //     function sortByCases(data){
-    //     data.sort(function(a, b){
-    //         return b.cases - a.cases;
-    //     })
-    // }
+    function populateCountryData(data)
+        {
+        function sortByCases(data){
+        data.sort(function(a, b){
+            return b.cases - a.cases;
+        })
+    }
 
+    sortByCases(data);
      
 
-        data.forEach(covid => {
-            const tr = document.createElement('tr');   
+    data.forEach(covid => {
+        const tr = document.createElement('tr');   
+
         // adding '+' sign to new to today new cases and today new deaths
         function addPlus(input){
             if(input === 0){
-                input = " ";
+                input = "";
+                return input;
+            } 
+             else {
+                input += "+";
+                return input;
+            }
+        }
+
+        function removeZero(input) {
+            if(input === 0) {
+                input = "";
                 return input;
             } else {
-                input += "+";
                 return input;
             }
         }
 
         const todayCases = addPlus(covid.todayCases);
         const todayDeaths = addPlus(covid.todayDeaths);
+        const peopleDied = removeZero(covid.deaths)
+        const recoveredCases = removeZero(covid.recovered)
+        const activeCases = removeZero(covid.active)
+        const criticalCases = removeZero(covid.critical)
+        const casesPerOneMillionCases = removeZero(covid.casesPerOneMillion)
+        const deathsPerOneMillionCases = removeZero(covid.deathsPerOneMillion)
+        const casesTested = removeZero(covid.tests)
+        const perOneMillionTestedCases = removeZero(covid.testsPerOneMillion)
+
 
         // function that creates td's
-        function createDataCell(prem){
+        function createDataCell(cellData){
             const td = document.createElement('td');
-            td.textContent = prem;
+            td.textContent = cellData;
             tr.appendChild(td)
             return tr;
         }
-        // console.log(createTd(covid.country))
-        // const countriesCell = createTd(covid.country);
-        // console.log(countriesCell)
-        
 
-        // const countriesCell = createDataCell(covid.country);
-        // const totalCasesCell = createDataCell(covid.country);
-        // const todayCasesCell = createDataCell(covid.country);
-        // const totalDeathsCell = createDataCell(covid.country);
-        // const todayDeathsCell = createDataCell(covid.country);
-        // const totalRecoveredCell = createDataCell(covid.country);
-        // const activeCell = createDataCell(covid.country);
-        // const criticalCell = createDataCell(covid.country);
-        // const casesPerMillionCell = createDataCell(covid.country);
-        // const deathsPerMillionCell = createDataCell(covid.country);
-        createDataCell(covid.country)
-        createDataCell(covid.cases)
-        createDataCell(covid.todayCases)
-        createDataCell(covid.deaths)
-        createDataCell(covid.todayDeaths)
-        createDataCell(covid.recovered)
-        createDataCell(covid.active)
-        createDataCell(covid.critical)
-        createDataCell(covid.casesPerOneMillion)
-        createDataCell(covid.deathsPerOneMillion)
-        createDataCell(covid.tests)
-        createDataCell(covid.testsPerOneMillion) 
-        // tr.appendChild(countriesCell)
-        
-        // tr.appendChild(totalCasesCell)
-        // tr.appendChild(todayCasesCell)
-        // tr.appendChild(totalDeathsCell)
-        // tr.appendChild(todayDeathsCell)
-        // tr.appendChild(totalRecoveredCell)
-        // tr.appendChild(activeCell)
-        // tr.appendChild(criticalCell)
-        // tr.appendChild(casesPerMillionCell)
-        // tr.appendChild(deathsPerMillionCell)
-        
+
+        createDataCell(covid.country);
+        createDataCell(covid.cases);
+        const newCases = createDataCell(todayCases).children[2];
+        createDataCell(peopleDied);
+        const newDeaths = createDataCell(todayDeaths).children[4];
+        createDataCell(recoveredCases);
+        createDataCell(activeCases);
+        createDataCell(criticalCases);
+        createDataCell(casesPerOneMillionCases);
+        createDataCell(deathsPerOneMillionCases);
+        createDataCell(casesTested);
+        createDataCell(perOneMillionTestedCases);
+
         tBody.appendChild(tr);
-        
-        
 
-
+        if(newCases.textContent.includes('+')){
+            newCases.style.background = "#f4f9a7";
+            // ff0000
+        } 
+        if( newDeaths.textContent.includes('+')){
+            newDeaths.style.background = "#ff0000";
+            newDeaths.style.color = "#ffffff";
+        }
     });  
 }  
 
@@ -200,3 +203,31 @@ document.addEventListener('DOMContentLoaded', () => { fetchApiData(); });
         //     `
 
        //   document.querySelector('.fetch-content').innerHTML = output;
+
+               // console.log(createTd(covid.country))
+        // const countriesCell = createTd(covid.country);
+        // console.log(countriesCell)
+        
+
+        // const countriesCell = createDataCell(covid.country);
+        // const totalCasesCell = createDataCell(covid.country);
+        // const todayCasesCell = createDataCell(covid.country);
+        // const totalDeathsCell = createDataCell(covid.country);
+        // const todayDeathsCell = createDataCell(covid.country);
+        // const totalRecoveredCell = createDataCell(covid.country);
+        // const activeCell = createDataCell(covid.country);
+        // const criticalCell = createDataCell(covid.country);
+        // const casesPerMillionCell = createDataCell(covid.country);
+        // const deathsPerMillionCell = createDataCell(covid.country);
+
+        // tr.appendChild(countriesCell)
+        
+        // tr.appendChild(totalCasesCell)
+        // tr.appendChild(todayCasesCell)
+        // tr.appendChild(totalDeathsCell)
+        // tr.appendChild(todayDeathsCell)
+        // tr.appendChild(totalRecoveredCell)
+        // tr.appendChild(activeCell)
+        // tr.appendChild(criticalCell)
+        // tr.appendChild(casesPerMillionCell)
+        // tr.appendChild(deathsPerMillionCell)

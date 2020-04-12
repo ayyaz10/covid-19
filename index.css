@@ -10,6 +10,7 @@ a:hover {
 
 a::after{
     content: '\25b4 \25be';
+    font-size: 19px;
     margin-left: 10px;
 }
 header {
@@ -71,18 +72,19 @@ table {
     margin-top: 50px;
     margin-left: 40px;
     margin-right: 100px;
-    /* width: 100%; */
+    width: 100%;
     border-collapse: collapse;
     /* overflow-y: hidden; */
 }
 
 th, td {
-    padding: 7px 12px;
+    padding: 7px 7px;
+    width: auto;
 }
 
 th {
     border: 1px solid #b8bab6;
-    text-align: center;
+    text-align: left;
 }
 
 td {
