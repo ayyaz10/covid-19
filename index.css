@@ -63,13 +63,36 @@ span.death-cases {
 .summary {
 text-align: center;
 }
-
+section {
+    padding-right: 100px;
+    padding-left: 50px;
+}
 table {
-    margin-top: 100px;
-    margin-left: 100px;
-    max-width: 700px;
+    margin-top: 50px;
+    margin-left: 40px;
+    margin-right: 100px;
+    /* width: 100%; */
+    border-collapse: collapse;
+    /* overflow-y: hidden; */
 }
 
+th, td {
+    padding: 7px 12px;
+}
+
+th {
+    border: 1px solid #b8bab6;
+    text-align: center;
+}
+
+td {
+    border: 1px solid #b8bab6;
+    text-align: right;
+    font-weight: 800;
+}
+td:first-child {
+    text-align: left;
+}
 table th {
-    font-size: 18px;
+    font-size: 14px;
 }
