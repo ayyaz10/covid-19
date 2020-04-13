@@ -17,11 +17,30 @@ function fetchApiData(){
             return response.json();
         })
         .then(data => {
-            function countriesCount(){
-                let i;
-            for(i = 0; i < data.length - 2; i++){
-                
+            // console.log(data[1].cases)
+            let total = 0;
+            let obj = {};
+            function sumWorldData(cases, newCases){
+                total += cases;
+                obj.totalCases;
+                obj.totalCases = total;
+                total += newCases;
+                obj.totalNewCases;
+                obj.totalNewCases = total;
             }
+            for(let i = 0; i < data.length; i ++){
+                // sumWorldData(data[i].cases)
+                sumWorldData(data[i].cases, data[i].todayCases)
+            }
+            console.log(obj)
+        console.log(obj.totalCases)
+        
+        
+
+           
+            function countriesCount(){
+            let i;
+            for(i = 0; i < data.length - 2; i++){}
             return i;
         }
         document.querySelector('.countries-count').textContent = countriesCount();
@@ -38,6 +57,7 @@ function fetchApiData(){
 
     sortByCases(data);
      
+
 
     data.forEach(covid => {
         const tr = document.createElement('tr');   
@@ -61,7 +81,7 @@ function fetchApiData(){
                 return input;
             }
         }
-
+        // calling addPlus and remove zero functions
         const todayCases = addPlus(covid.todayCases);
         const todayDeaths = addPlus(covid.todayDeaths);
         const peopleDied = removeZero(covid.deaths)
@@ -83,7 +103,6 @@ function fetchApiData(){
             return tr;
         }
 
-        
         const countries = createDataCell(covid.country).children[0];
         createDataCell(covid.cases);
         const newCases = createDataCell(todayCases).children[2];

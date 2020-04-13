@@ -42,9 +42,6 @@ h5, .brief-paragraph {
 .countries-count, .bold {
     font-weight: 800;
 }
-section {
-
-}
 
 h2.confirmed-cases-heading, h2.recovered-cases-heading, h2.death-cases-heading  {
     font-size: 3.1rem;
