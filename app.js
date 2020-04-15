@@ -18,22 +18,52 @@ function fetchApiData(){
         })
         .then(data => {
             // console.log(data[1].cases)
-            let total = 0;
+            let tCases = 0;
+            let tNewCases = 0;
+            let tDeaths = 0;
+            let tNDeaths = 0;
+            let tRecovered  = 0;
+            let tActiveCases = 0;
+            let tCriticalCases = 0;
+            let tCasesPMillion = 0;
+            let tDeathsPMillion = 0;
+            let tTestsPMillion = 0;
             let obj = {};
-            function sumWorldData(cases, newCases){
-                total += cases;
-                obj.totalCases;
-                obj.totalCases = total;
-                total += newCases;
-                obj.totalNewCases;
-                obj.totalNewCases = total;
+            function sumWorldData(cases,
+                 newCases,
+                 ){
+                tCases += cases;
+                tNewCases += newCases;
+                tDeaths
+                tNDeaths
+                tRecovered
+                tActiveCases
+                tCriticalCases
+                tCasesPMillion
+                tDeathsPMillion
+                tTestsPMillion
+                // obj.totalCases;
+                obj.totalCases = tCases;
+                // obj.totalNewCases;
+                obj.totalNewCases = tNewCases;
             }
             for(let i = 0; i < data.length; i ++){
-                // sumWorldData(data[i].cases)
-                sumWorldData(data[i].cases, data[i].todayCases)
-            }
+                sumWorldData(
+                     data[i].cases,
+                     data[i].todayCases,
+                     data[i].deaths,
+                     data[i].todayDeaths,
+                     data[i].recovered,
+                     data[i].active,
+                     data[i].critical,
+                     data[i].casesPerOneMillion,
+                     data[i].deathsPerOneMillion,
+                     data[i].tests,
+                     data[i].testsPerOneMillion
+                )}
             console.log(obj)
         console.log(obj.totalCases)
+        console.log(obj.totalNewCases)
         
         
 
