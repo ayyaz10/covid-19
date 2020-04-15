@@ -92,6 +92,7 @@ function fetchApiData(){
                     td.textContent = cellData;
                     return td;
                 }   
+
                 tBody.firstElementChild.appendChild(createDataCell(obj.totalCases))
                 tBody.firstElementChild.appendChild(createDataCell(obj.totalNewCases))
                 tBody.firstElementChild.appendChild(createDataCell(obj.totalDeaths))
@@ -105,7 +106,7 @@ function fetchApiData(){
                 tBody.firstElementChild.appendChild(createDataCell(obj.totalTestsPerMillion))
                 tBody.firstElementChild.style.background = "#dddddd";
 
-
+                
            
             function countriesCount(){
             let i;
@@ -124,13 +125,12 @@ function fetchApiData(){
         })
     }
 
-    sortByCases(data);
-     
 
+    sortByCases(data);
 
     data.forEach(covid => {
-        const tr = document.createElement('tr');   
-
+        const tr = document.createElement('tr');
+        
         // adding '+' sign to new to today new cases and today new deaths
         function addPlus(input){
             if(input === 0){
@@ -152,6 +152,7 @@ function fetchApiData(){
         }
         // calling addPlus and remove zero functions
         const todayCases = addPlus(covid.todayCases);
+        // console.log(parseInt(todayCommaAddedCases))
         const todayDeaths = addPlus(covid.todayDeaths);
         const peopleDied = removeZero(covid.deaths)
         const recoveredCases = removeZero(covid.recovered)
@@ -171,10 +172,21 @@ function fetchApiData(){
             tr.appendChild(td)
             return tr;
         }
+
+                // function that adds Commas in numbers
+
+                function addComma(x){
+                    return x.toLocaleString();
+                }
+                const commaAddedCases =  addComma(covid.cases)
+                const todayCommaAddedCases =  addComma(todayCases)
+                // console.log(typeof(todayCases))
+                console.log(parseFloat(commaAddedCases))
+            
         // createDataCell("world")
         const countries = createDataCell(covid.country).children[0];
-        createDataCell(covid.cases);
-        const newCases = createDataCell(todayCases).children[2];
+        createDataCell(commaAddedCases);
+        const newCases = createDataCell(todayCommaAddedCases).children[2];
         createDataCell(peopleDied);
         const newDeaths = createDataCell(todayDeaths).children[4];
         createDataCell(recoveredCases);
