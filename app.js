@@ -17,7 +17,8 @@ function fetchApiData(){
             return response.json();
         })
         .then(data => {
-            // console.log(data[1].cases)
+
+            // calculating all cases and adding the total (world) section at the top and the end of the table
             let tCases = 0;
             let tNewCases = 0;
             let tDeaths = 0;
@@ -27,25 +28,48 @@ function fetchApiData(){
             let tCriticalCases = 0;
             let tCasesPMillion = 0;
             let tDeathsPMillion = 0;
+            let tTests = 0;
             let tTestsPMillion = 0;
             let obj = {};
-            function sumWorldData(cases,
+
+            function sumWorldData(
+                 cases,
                  newCases,
+                 deaths,
+                 todayDeaths,
+                 recovered,
+                 active,
+                 critical,
+                 casesPerOneMillion,
+                 deathsPerOneMillion,
+                 tests,
+                 testsPerOneMillion   
                  ){
+                // here 't' means total
                 tCases += cases;
                 tNewCases += newCases;
-                tDeaths
-                tNDeaths
-                tRecovered
-                tActiveCases
-                tCriticalCases
-                tCasesPMillion
-                tDeathsPMillion
-                tTestsPMillion
-                // obj.totalCases;
+                tDeaths += deaths;
+                tNDeaths += todayDeaths;
+                tRecovered += recovered;
+                tActiveCases += active;
+                tCriticalCases += critical;
+                tCasesPMillion += casesPerOneMillion;
+                tDeathsPMillion += deathsPerOneMillion;
+                tTests += tests;
+                tTestsPMillion += testsPerOneMillion;
+                
                 obj.totalCases = tCases;
-                // obj.totalNewCases;
                 obj.totalNewCases = tNewCases;
+                obj.totalDeaths = tDeaths;
+                obj.totalNewDeaths = tNDeaths;
+                obj.totalRecovered = tRecovered;
+                obj.totalActiveCases = tActiveCases;
+                obj.totalCriticalCases = tCriticalCases;
+                obj.totalCasesPerMillion = tCasesPMillion;
+                obj.totalDeathsPerMillion = tDeathsPMillion;
+                obj.totalTests = tTests;
+                obj.totalTestsPerMillion = tTestsPMillion;
+             
             }
             for(let i = 0; i < data.length; i ++){
                 sumWorldData(
@@ -60,12 +84,27 @@ function fetchApiData(){
                      data[i].deathsPerOneMillion,
                      data[i].tests,
                      data[i].testsPerOneMillion
-                )}
-            console.log(obj)
-        console.log(obj.totalCases)
-        console.log(obj.totalNewCases)
-        
-        
+                );}
+                const tr = document.createElement('tr');  
+
+                function createDataCell(cellData){
+                    const td = document.createElement('td');
+                    td.textContent = cellData;
+                    return td;
+                }   
+                tBody.firstElementChild.appendChild(createDataCell(obj.totalCases))
+                tBody.firstElementChild.appendChild(createDataCell(obj.totalNewCases))
+                tBody.firstElementChild.appendChild(createDataCell(obj.totalDeaths))
+                tBody.firstElementChild.appendChild(createDataCell(obj.totalNewDeaths))
+                tBody.firstElementChild.appendChild(createDataCell(obj.totalRecovered))
+                tBody.firstElementChild.appendChild(createDataCell(obj.totalActiveCases))
+                tBody.firstElementChild.appendChild(createDataCell(obj.totalCriticalCases))
+                tBody.firstElementChild.appendChild(createDataCell(obj.totalCasesPerMillion))
+                tBody.firstElementChild.appendChild(createDataCell(obj.totalDeathsPerMillion))
+                tBody.firstElementChild.appendChild(createDataCell(obj.totalTests))
+                tBody.firstElementChild.appendChild(createDataCell(obj.totalTestsPerMillion))
+                tBody.firstElementChild.style.background = "#dddddd";
+
 
            
             function countriesCount(){
@@ -132,7 +171,7 @@ function fetchApiData(){
             tr.appendChild(td)
             return tr;
         }
-
+        // createDataCell("world")
         const countries = createDataCell(covid.country).children[0];
         createDataCell(covid.cases);
         const newCases = createDataCell(todayCases).children[2];
