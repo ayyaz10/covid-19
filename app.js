@@ -1,6 +1,7 @@
 
 
-const tBody = document.querySelector('.fetch-content')
+const tBody = document.querySelector('.fetch-content');
+const bottomTBody = document.querySelector('.bottom-sum');
 // fetching confirmed, recovered and total deaths
 function fetchApiData(){
         fetch('http://api.coronastatistics.live/all').then((response) => {
@@ -93,21 +94,56 @@ function fetchApiData(){
                     return td;
                 }   
 
-                tBody.firstElementChild.appendChild(createDataCell(obj.totalCases))
-                tBody.firstElementChild.appendChild(createDataCell(obj.totalNewCases))
-                tBody.firstElementChild.appendChild(createDataCell(obj.totalDeaths))
-                tBody.firstElementChild.appendChild(createDataCell(obj.totalNewDeaths))
-                tBody.firstElementChild.appendChild(createDataCell(obj.totalRecovered))
-                tBody.firstElementChild.appendChild(createDataCell(obj.totalActiveCases))
-                tBody.firstElementChild.appendChild(createDataCell(obj.totalCriticalCases))
-                tBody.firstElementChild.appendChild(createDataCell(obj.totalCasesPerMillion))
-                tBody.firstElementChild.appendChild(createDataCell(obj.totalDeathsPerMillion))
-                tBody.firstElementChild.appendChild(createDataCell(obj.totalTests))
-                tBody.firstElementChild.appendChild(createDataCell(obj.totalTestsPerMillion))
-                tBody.firstElementChild.style.background = "#dddddd";
+                function addComma(x){
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
+                const totalCases = addComma(obj.totalCases)
+                const totalNewCases = addComma(obj.totalNewCases)
+                const totalDeaths = addComma(obj.totalDeaths)
+                const totalNewDeaths = addComma(obj.totalNewDeaths)
+                const totalRecovered = addComma(obj.totalRecovered)
+                const totalActiveCases = addComma(obj.totalActiveCases)
+                const totalCriticalCases = addComma(obj.totalCriticalCases)
+                const totalCasesPerMillion = addComma(obj.totalCasesPerMillion)
+                const totalDeathsPerMillion = addComma(obj.totalDeathsPerMillion)
+                const totalTests = addComma(obj.totalTests)
+                const totalTestsPerMillion = addComma(obj.totalTestsPerMillion)
 
+
+                tBody.firstElementChild.appendChild(createDataCell(totalCases))
+                tBody.firstElementChild.appendChild(createDataCell(totalNewCases))
+                tBody.firstElementChild.appendChild(createDataCell(totalDeaths))
+                tBody.firstElementChild.appendChild(createDataCell(totalNewDeaths))
+                tBody.firstElementChild.appendChild(createDataCell(totalRecovered))
+                tBody.firstElementChild.appendChild(createDataCell(totalActiveCases))
+                tBody.firstElementChild.appendChild(createDataCell(totalCriticalCases))
+                tBody.firstElementChild.appendChild(createDataCell(totalCasesPerMillion))
+                tBody.firstElementChild.appendChild(createDataCell(totalDeathsPerMillion))
+                tBody.firstElementChild.appendChild(createDataCell(totalTests))
+                tBody.firstElementChild.appendChild(createDataCell(totalTestsPerMillion))
+                tBody.firstElementChild.style.background = "#dddddd";
                 
-           
+                // styling new cases and new deaths cells 
+                const colorAddedtotalNewCases = createDataCell(totalNewCases);
+                const colorAddedtotalNewDeaths = createDataCell(totalNewDeaths);
+                console.log(colorAddedtotalNewDeaths)
+                colorAddedtotalNewCases.style.background = "#f4f9a7";
+                colorAddedtotalNewDeaths.style.background = "#ff0000";
+                colorAddedtotalNewDeaths.style.color = "#ffffff";
+
+                // bottom of the table total section
+                bottomTBody.firstElementChild.appendChild(createDataCell(totalCases))
+                bottomTBody.firstElementChild.appendChild(colorAddedtotalNewCases)
+                bottomTBody.firstElementChild.appendChild(createDataCell(totalDeaths))
+                bottomTBody.firstElementChild.appendChild(colorAddedtotalNewDeaths)
+                bottomTBody.firstElementChild.appendChild(createDataCell(totalRecovered))
+                bottomTBody.firstElementChild.appendChild(createDataCell(totalActiveCases))
+                bottomTBody.firstElementChild.appendChild(createDataCell(totalCriticalCases))
+                bottomTBody.firstElementChild.appendChild(createDataCell(totalCasesPerMillion))
+                bottomTBody.firstElementChild.appendChild(createDataCell(totalDeathsPerMillion))
+                bottomTBody.firstElementChild.appendChild(createDataCell(totalTests))
+                bottomTBody.firstElementChild.appendChild(createDataCell(totalTestsPerMillion))
+
             function countriesCount(){
             let i;
             for(i = 0; i < data.length - 2; i++){}
@@ -119,13 +155,13 @@ function fetchApiData(){
     }
 
     function populateCountryData(data){
+
+        // sorting by cases
         function sortByCases(data){
         data.sort(function(a, b){
             return b.cases - a.cases;
         })
     }
-
-
     sortByCases(data);
 
     data.forEach(covid => {
@@ -151,20 +187,18 @@ function fetchApiData(){
             }
         }
         // calling addPlus and remove zero functions
-        const todayCases = addPlus(covid.todayCases);
-        // console.log(parseInt(todayCommaAddedCases))
-        const todayDeaths = addPlus(covid.todayDeaths);
-        const peopleDied = removeZero(covid.deaths)
-        const recoveredCases = removeZero(covid.recovered)
-        const activeCases = removeZero(covid.active)
-        const criticalCases = removeZero(covid.critical)
-        const casesPerOneMillionCases = removeZero(covid.casesPerOneMillion)
-        const deathsPerOneMillionCases = removeZero(covid.deathsPerOneMillion)
-        const casesTested = removeZero(covid.tests)
-        const perOneMillionTestedCases = removeZero(covid.testsPerOneMillion)
+        const plusAddedtodayCases = addPlus(covid.todayCases);
+        const removedZeroDeaths = removeZero(covid.deaths)
+        const plusAddedTodayDeaths = addPlus(covid.todayDeaths);
+        const removedZeroRecoveredCases = removeZero(covid.recovered)
+        const removedZeroActiveCases = removeZero(covid.active)
+        const removedZeroCriticalCases = removeZero(covid.critical)
+        const removedZeroCasesPerOneMillionCases = removeZero(covid.casesPerOneMillion)
+        const removedZeroDeathsPerOneMillionCases = removeZero(covid.deathsPerOneMillion)
+        const removedZeroCasesTested = removeZero(covid.tests)
+        const removedZeroPerOneMillionTestedCases = removeZero(covid.testsPerOneMillion)
 
         // injecting data to the table
-        
         // function that creates td's
         function createDataCell(cellData){
             const td = document.createElement('td');
@@ -173,36 +207,46 @@ function fetchApiData(){
             return tr;
         }
 
-                // function that adds Commas in numbers
+        // function that adds Commas in numbers
+        function addComma(x){
+            if(x === null){
+                x = "";
+            }
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
 
-                function addComma(x){
-                    return x.toLocaleString();
-                }
-                const commaAddedCases =  addComma(covid.cases)
-                const todayCommaAddedCases =  addComma(todayCases)
-                // console.log(typeof(todayCases))
-                console.log(parseFloat(commaAddedCases))
+                // calling addComma function in order to add comma to each column
+                const commaAddedCases =  addComma(covid.cases);
+                const commaAddedTodayCases =  addComma(plusAddedtodayCases);
+                const commaAddedDeaths =  addComma(removedZeroDeaths);
+                const commaAddedTodayDeaths =  addComma(plusAddedTodayDeaths);
+                const commaAddedRecoveredCases =  addComma(removedZeroRecoveredCases);
+                const commaAddedActiveCases =  addComma(removedZeroActiveCases);
+                const commaAddedCriticalCases =  addComma(removedZeroCriticalCases);
+                const commaAddedPerOneMillionCases =  addComma(removedZeroCasesPerOneMillionCases);
+                const commaAddedPerOneMillionDeaths =  addComma(removedZeroDeathsPerOneMillionCases);
+                const commaAddedTests =  addComma(removedZeroCasesTested);
+                const commaAddedTestsPerOneMillion =  addComma(removedZeroPerOneMillionTestedCases);
+                
             
-        // createDataCell("world")
         const countries = createDataCell(covid.country).children[0];
         createDataCell(commaAddedCases);
-        const newCases = createDataCell(todayCommaAddedCases).children[2];
-        createDataCell(peopleDied);
-        const newDeaths = createDataCell(todayDeaths).children[4];
-        createDataCell(recoveredCases);
-        createDataCell(activeCases);
-        createDataCell(criticalCases);
-        createDataCell(casesPerOneMillionCases);
-        createDataCell(deathsPerOneMillionCases);
-        createDataCell(casesTested);
-        createDataCell(perOneMillionTestedCases);
+        const newCases = createDataCell(commaAddedTodayCases).children[2];
+        createDataCell(commaAddedDeaths);
+        const newDeaths = createDataCell(commaAddedTodayDeaths).children[4];
+        createDataCell(commaAddedRecoveredCases);
+        createDataCell(commaAddedActiveCases);
+        createDataCell(commaAddedCriticalCases);
+        createDataCell(commaAddedPerOneMillionCases);
+        createDataCell(commaAddedPerOneMillionDeaths);
+        createDataCell(commaAddedTests);
+        createDataCell(commaAddedTestsPerOneMillion);
 
         tBody.appendChild(tr);
 
         // styling new cases and new deaths cells + styling international conveyances to distinguish them from other countries.
         if(newCases.textContent.includes('+')){
             newCases.style.background = "#f4f9a7";
-            // ff0000
         } 
         if( newDeaths.textContent.includes('+')){
             newDeaths.style.background = "#ff0000";
