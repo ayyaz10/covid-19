@@ -52,15 +52,15 @@ h2.confirmed-cases-heading, h2.recovered-cases-heading, h2.death-cases-heading  
 
 span.confirmed-cases, span.recovered-cases, span.death-cases {
     display: block;
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 800;
     text-align: center;   
 }
 span.confirmed-cases {
-    color: #b8bab6;
+    color: #9c9c9c;
 }
 span.recovered-cases {
-    color: #8bc949;
+    color: #7ebe39;
 }
 span.death-cases {
     color: #606060;
@@ -104,4 +104,8 @@ td:first-child {
 }
 table th {
     font-size: 14px;
+}
+
+tr:not(:first-child):hover {
+    background-color: #F2F2F2   ;
 }
