@@ -6,19 +6,29 @@ const bottomTBody = document.querySelector('.bottom-sum');
 function fetchApiData(){
         fetch('http://api.coronastatistics.live/all').then((response) => {
         return response.json();
-    }).then((data) => {
-        const totalConfirmed = document.getElementsByClassName('confirmed-cases')[0].innerHTML = data.cases;
-        const totalRecovered = document.getElementsByClassName('recovered-cases')[0].innerHTML = data.recovered;
-        const totalDeaths = document.getElementsByClassName('death-cases')[0].innerHTML = data.deaths;
-        document.getElementsByClassName('active-cases')[0].innerHTML = totalConfirmed - (totalRecovered + totalDeaths);
-        document.getElementsByClassName('closed-cases')[0].innerHTML = totalRecovered + totalDeaths;
+    }).then(data => {
+        
+        function addComma(x){
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        const totalConfirmed = document.getElementsByClassName('confirmed-cases')[0];
+        const totalRecovered = document.getElementsByClassName('recovered-cases')[0];
+        const totalDeaths = document.getElementsByClassName('death-cases')[0];
+
+        totalConfirmed.innerHTML = addComma(data.cases);
+        totalRecovered.innerHTML = addComma(data.recovered);
+        totalDeaths.innerHTML = addComma(data.deaths);
+
+        const totalActiveCases = data.cases - (data.recovered + data.deaths);
+        document.getElementsByClassName('active-cases')[0].innerHTML = addComma(totalActiveCases)
+        const totalClosedCases = data.recovered  + data.deaths;
+        document.getElementsByClassName('closed-cases')[0].innerHTML = addComma(totalClosedCases);
     })
 
         fetch('http://api.coronastatistics.live/countries').then(response => {
             return response.json();
         })
         .then(data => {
-
             // calculating all cases and adding the total (world) section at the top and the end of the table
             let tCases = 0;
             let tNewCases = 0;
@@ -46,6 +56,7 @@ function fetchApiData(){
                 //  tests,
                 //  testsPerOneMillion   
                  ){
+
                 // here 't' means total
                 tCases += cases;
                 tNewCases += newCases;
@@ -126,7 +137,6 @@ function fetchApiData(){
                 // styling new cases and new deaths cells 
                 const colorAddedtotalNewCases = createDataCell(totalNewCases);
                 const colorAddedtotalNewDeaths = createDataCell(totalNewDeaths);
-                console.log(colorAddedtotalNewDeaths)
                 colorAddedtotalNewCases.style.background = "#f4f9a7";
                 colorAddedtotalNewDeaths.style.background = "#ff0000";
                 colorAddedtotalNewDeaths.style.color = "#ffffff";
@@ -209,7 +219,6 @@ function fetchApiData(){
 
         // function that adds Commas in numbers
         function addComma(x){
-            console.log(x)
             if(x === null){
                 x = "";
             }
