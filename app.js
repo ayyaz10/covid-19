@@ -24,8 +24,9 @@ function fetchApiData(){
         totalDeaths.innerHTML = addComma(data.deaths);
 
         const totalActiveCases = data.cases - (data.recovered + data.deaths);
-        document.getElementsByClassName('active-cases')[0].innerHTML = addComma(totalActiveCases)
         const totalClosedCases = data.recovered  + data.deaths;
+
+        document.getElementsByClassName('active-cases')[0].innerHTML = addComma(totalActiveCases)
         document.getElementsByClassName('closed-cases')[0].innerHTML = addComma(totalClosedCases);
     })
 
@@ -71,6 +72,8 @@ function fetchApiData(){
                 tCriticalCases += critical;
                 tCasesPMillion += casesPerOneMillion;
                 tDeathsPMillion += deathsPerOneMillion;
+
+                
                 // tTests += tests;
                 // tTestsPMillion += testsPerOneMillion;
                 
@@ -81,8 +84,8 @@ function fetchApiData(){
                 obj.totalRecovered = tRecovered;
                 obj.totalActiveCases = tActiveCases;
                 obj.totalCriticalCases = tCriticalCases;
-                obj.totalCasesPerMillion = tCasesPMillion;
-                obj.totalDeathsPerMillion = tDeathsPMillion;
+                obj.totalCasesPerMillion = tCasesPMillion.toFixed(2);
+                obj.totalDeathsPerMillion = tDeathsPMillion.toFixed(2);
                 // obj.totalTests = tTests;
                 // obj.totalTestsPerMillion = tTestsPMillion;
              
