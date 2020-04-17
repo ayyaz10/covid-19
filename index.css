@@ -76,6 +76,7 @@ section {
 }
 
 table {
+    position: relative;
     margin-top: 30px;
     margin-left: 40px;
     margin-right: 100px;
@@ -83,7 +84,24 @@ table {
     border-collapse: collapse;
     /* overflow-y: hidden; */
 }
+th{
+    position: -webkit-sticky;
+    position: sticky;
+    top: -1px;
+    background: #e6ecf2;
 
+    
+}
+
+thead tr {
+
+}
+thead {
+  
+    -webkit-box-shadow: 6px 18px 11px -22px rgba(0,0,0,0.29);
+    -moz-box-shadow: 6px 18px 11px -22px rgba(0,0,0,0.29);
+    box-shadow: 6px 18px 11px -22px rgba(0,0,0,0.29);
+}
 th, td {
     padding: 7px 7px;
     width: auto;
@@ -102,10 +120,17 @@ td {
 td:first-child {
     text-align: left;
 }
+.sticky #tb {
+    position: sticky;
+    top: 0;
+    transition:all 0.2s;
+
+}
+
 table th {
     font-size: 14px;
 }
 
 tr:not(:first-child):hover {
-    background-color: #F2F2F2   ;
+    background-color: #F2F2F2;
 }

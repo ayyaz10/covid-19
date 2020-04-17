@@ -2,12 +2,16 @@
 
 const tBody = document.querySelector('.fetch-content');
 const bottomTBody = document.querySelector('.bottom-sum');
+const tableHeading = document.querySelector('thead');
+
+
+// console.log(topToTh)
 // fetching confirmed, recovered and total deaths
 function fetchApiData(){
         fetch('http://api.coronastatistics.live/all').then((response) => {
         return response.json();
     }).then(data => {
-        
+
         function addComma(x){
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
