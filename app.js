@@ -231,7 +231,6 @@ function fetchApiData(){
             }
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-
                 // calling addComma function in order to add comma to each column
                 const commaAddedCases = addComma(covid.cases);
                 const commaAddedTodayCases = addComma(plusAddedtodayCases);

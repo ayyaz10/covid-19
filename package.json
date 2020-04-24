@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,7 @@
   "bugs": {
     "url": "https://github.com/codementee/covid-19/issues"
   },
-  "homepage": "https://github.com/codementee/covid-19#readme"
+  "homepage": "https://github.com/codementee/covid-19#readme",
+  "dependencies": {
+  }
 }
