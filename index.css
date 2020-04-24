@@ -75,6 +75,17 @@ section {
     padding-left: 50px;
 }
 
+
+/* .search-box */
+.search-text {
+    padding: 15px 10px;
+}
+input[type=text] {
+  max-width: 25%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
 table {
     position: relative;
     margin-top: 30px;

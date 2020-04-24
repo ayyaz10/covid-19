@@ -183,6 +183,8 @@ function fetchApiData(){
 
     data.forEach(covid => {
         const tr = document.createElement('tr');
+        tr.classList.add('tr')
+
         
         // adding '+' sign to new to today new cases and today new deaths
         function addPlus(input){
@@ -271,6 +273,30 @@ function fetchApiData(){
             countries.style.color= "blue";
             countries.style.fontStyle = "italic";
         }
+
+        let input = document.querySelector('.search-box');
+        // console.log(input)
+input.addEventListener("keyup", function(){
+        let filter, ul, li, a, i;
+        // input = 
+        filter = input.value.toLowerCase();
+        // console.log(filter)
+        const tr = document.querySelector(".tr");
+        // console.log(tr)
+        const td = tr.querySelectorAll("td").innerHTML;
+
+        // console.log(td)
+        for (i = 0; i < td.length; i++) {
+        //   a = td[i].getElementsByTagName("a")[0];
+        console.log(td)
+          if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
+            td[i].style.display = "";
+          } else {
+            td[i].style.display = "none";
+          }
+        }
+
+})
     });  
 }  
 
