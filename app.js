@@ -274,24 +274,25 @@ function fetchApiData(){
             countries.style.fontStyle = "italic";
         }
     });  
-    
-let input = document.querySelector('.search-box');
-// console.log(input)
-input.addEventListener("keyup", function(){
 
-    const tr = document.querySelectorAll(".tr");
-    let filter;
-    filter = input.value.toLowerCase();
+    // adding search functionality
+    let input = document.querySelector('.search-box');
 
-    for (let i = 0; i < tr.length; i++) {
-        if (tr[i].firstElementChild.innerHTML.toLowerCase().indexOf(filter) > -1) {
-            console.log(tr[i])
-            tr[i].style.display = "";
-        } else {
-            tr[i].style.display = "none";
+    input.addEventListener("keyup", function(){
+
+        const tr = document.querySelectorAll(".tr");
+        let filter;
+        filter = input.value.toLowerCase();
+
+        for (let i = 0; i < tr.length; i++) {
+            if (tr[i].firstElementChild.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                console.log(tr[i])
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
         }
-    }
-})
+    })
     
 } 
 
