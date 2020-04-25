@@ -233,19 +233,19 @@ function fetchApiData(){
             }
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-                // calling addComma function in order to add comma to each column
-                const commaAddedCases = addComma(covid.cases);
-                const commaAddedTodayCases = addComma(plusAddedtodayCases);
-                const commaAddedDeaths = addComma(removedZeroDeaths);
-                const commaAddedTodayDeaths = addComma(plusAddedTodayDeaths);
-                const commaAddedRecoveredCases = addComma(removedZeroRecoveredCases);
-                const commaAddedActiveCases = addComma(removedZeroActiveCases);
-                const commaAddedCriticalCases = addComma(removedZeroCriticalCases);
-                const commaAddedPerOneMillionCases = addComma(removedZeroCasesPerOneMillionCases);
-                const commaAddedPerOneMillionDeaths = addComma(removedZeroDeathsPerOneMillionCases);
-                // const commaAddedTests = addComma(removedZeroCasesTested);
-                // const commaAddedTestsPerOneMillion = addComma(removedZeroPerOneMillionTestedCases);
-                
+        // calling addComma function in order to add comma to each column
+        const commaAddedCases = addComma(covid.cases);
+        const commaAddedTodayCases = addComma(plusAddedtodayCases);
+        const commaAddedDeaths = addComma(removedZeroDeaths);
+        const commaAddedTodayDeaths = addComma(plusAddedTodayDeaths);
+        const commaAddedRecoveredCases = addComma(removedZeroRecoveredCases);
+        const commaAddedActiveCases = addComma(removedZeroActiveCases);
+        const commaAddedCriticalCases = addComma(removedZeroCriticalCases);
+        const commaAddedPerOneMillionCases = addComma(removedZeroCasesPerOneMillionCases);
+        const commaAddedPerOneMillionDeaths = addComma(removedZeroDeathsPerOneMillionCases);
+        // const commaAddedTests = addComma(removedZeroCasesTested);
+        // const commaAddedTestsPerOneMillion = addComma(removedZeroPerOneMillionTestedCases);
+            
             
         const countries = createDataCell(covid.country).children[0];
         createDataCell(commaAddedCases);
@@ -273,32 +273,29 @@ function fetchApiData(){
             countries.style.color= "blue";
             countries.style.fontStyle = "italic";
         }
-
-        let input = document.querySelector('.search-box');
-        // console.log(input)
-input.addEventListener("keyup", function(){
-        let filter, ul, li, a, i;
-        // input = 
-        filter = input.value.toLowerCase();
-        // console.log(filter)
-        const tr = document.querySelector(".tr");
-        // console.log(tr)
-        const td = tr.querySelectorAll("td").innerHTML;
-
-        // console.log(td)
-        for (i = 0; i < td.length; i++) {
-        //   a = td[i].getElementsByTagName("a")[0];
-        console.log(td)
-          if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
-            td[i].style.display = "";
-          } else {
-            td[i].style.display = "none";
-          }
-        }
-
-})
     });  
-}  
+    
+let input = document.querySelector('.search-box');
+// console.log(input)
+input.addEventListener("keyup", function(){
+
+    const tr = document.querySelectorAll(".tr");
+    let filter;
+    filter = input.value.toLowerCase();
+
+    for (let i = 0; i < tr.length; i++) {
+        if (tr[i].firstElementChild.innerHTML.toLowerCase().indexOf(filter) > -1) {
+            console.log(tr[i])
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+    }
+})
+    
+} 
+
+
 
 // calling main function
 document.addEventListener('DOMContentLoaded', () => { fetchApiData(); });
