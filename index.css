@@ -77,8 +77,10 @@ section {
 
 
 /* .search-box */
-.search-text {
-    padding: 15px 10px;
+.search-field {
+    display: flex;
+    justify-content: flex-end;
+
 }
 input[type=text] {
   max-width: 25%;
