@@ -183,8 +183,7 @@ function fetchApiData(){
 
     data.forEach(covid => {
         const tr = document.createElement('tr');
-        tr.classList.add('tr')
-
+        tr.classList.add('tr');
         
         // adding '+' sign to new to today new cases and today new deaths
         function addPlus(input){
@@ -197,6 +196,7 @@ function fetchApiData(){
             }
         }
 
+        // function that removes zero 
         function removeZero(input) {
             if(input === 0) {
                 input = "";
@@ -205,7 +205,8 @@ function fetchApiData(){
                 return input;
             }
         }
-        // calling addPlus and remove zero functions
+
+        // calling addPlus and removeZero functions
         const plusAddedtodayCases = addPlus(covid.todayCases);
         const removedZeroDeaths = removeZero(covid.deaths)
         const plusAddedTodayDeaths = addPlus(covid.todayDeaths);
@@ -218,7 +219,7 @@ function fetchApiData(){
         // const removedZeroPerOneMillionTestedCases = removeZero(covid.testsPerOneMillion)
 
         // injecting data to the table
-        // function that creates td's
+        // function that creates td's and appends td in to tr
         function createDataCell(cellData){
             const td = document.createElement('td');
             td.textContent = cellData;
@@ -233,6 +234,7 @@ function fetchApiData(){
             }
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
+
         // calling addComma function in order to add comma to each column
         const commaAddedCases = addComma(covid.cases);
         const commaAddedTodayCases = addComma(plusAddedtodayCases);
@@ -278,15 +280,12 @@ function fetchApiData(){
     // adding search functionality
     let input = document.querySelector('.search-box');
 
-    input.addEventListener("keyup", function(){
-
+    input.addEventListener("keyup", () => {
         const tr = document.querySelectorAll(".tr");
-        let filter;
-        filter = input.value.toLowerCase();
+        const filter = input.value.toLowerCase();
 
         for (let i = 0; i < tr.length; i++) {
             if (tr[i].firstElementChild.innerHTML.toLowerCase().indexOf(filter) > -1) {
-                console.log(tr[i])
                 tr[i].style.display = "";
             } else {
                 tr[i].style.display = "none";
