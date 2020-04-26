@@ -7,8 +7,10 @@ const tableHeading = document.querySelector('thead');
 
 // console.log(topToTh)
 // fetching confirmed, recovered and total deaths
+
+// http://api.coronastatistics.live/all
 function fetchApiData(){
-        fetch('http://api.coronastatistics.live/all').then((response) => {
+        fetch('https://corona.lmao.ninja/v2/all').then((response) => {
         return response.json();
     }).then(data => {
 
@@ -30,10 +32,12 @@ function fetchApiData(){
         document.getElementsByClassName('closed-cases')[0].innerHTML = addComma(totalClosedCases);
     })
 
-        fetch('http://api.coronastatistics.live/countries').then(response => {
+        fetch('https://corona.lmao.ninja/v2/countries/').then(response => {
             return response.json();
         })
         .then(data => {
+
+            console.log(data)
             // calculating all cases and adding the total (world) section at the top and the end of the table
             let tCases = 0;
             let tNewCases = 0;
@@ -124,8 +128,8 @@ function fetchApiData(){
                 const totalCriticalCases = addComma(obj.totalCriticalCases);
                 const totalCasesPerMillion = addComma(obj.totalCasesPerMillion);
                 const totalDeathsPerMillion = addComma(obj.totalDeathsPerMillion);
-                // const totalTests = addComma(obj.totalTests);
-                // const totalTestsPerMillion = addComma(obj.totalTestsPerMillion);
+                const totalTests = addComma(obj.totalTests);
+                const totalTestsPerMillion = addComma(obj.totalTestsPerMillion);
 
 
                 tBody.firstElementChild.appendChild(createDataCell(totalCases));
@@ -137,11 +141,14 @@ function fetchApiData(){
                 tBody.firstElementChild.appendChild(createDataCell(totalCriticalCases));
                 tBody.firstElementChild.appendChild(createDataCell(totalCasesPerMillion));
                 tBody.firstElementChild.appendChild(createDataCell(totalDeathsPerMillion));
+
                 // tBody.firstElementChild.appendChild(createDataCell(totalTests));
                 // tBody.firstElementChild.appendChild(createDataCell(totalTestsPerMillion));
+
                 tBody.firstElementChild.style.background = "#dddddd";
                 
                 // styling new cases and new deaths cells 
+
                 const colorAddedtotalNewCases = createDataCell(totalNewCases);
                 const colorAddedtotalNewDeaths = createDataCell(totalNewDeaths);
                 colorAddedtotalNewCases.style.background = "#f4f9a7";
@@ -149,6 +156,7 @@ function fetchApiData(){
                 colorAddedtotalNewDeaths.style.color = "#ffffff";
 
                 // bottom of the table total section
+
                 bottomTBody.firstElementChild.appendChild(createDataCell(totalCases))
                 bottomTBody.firstElementChild.appendChild(colorAddedtotalNewCases)
                 bottomTBody.firstElementChild.appendChild(createDataCell(totalDeaths))
@@ -158,6 +166,7 @@ function fetchApiData(){
                 bottomTBody.firstElementChild.appendChild(createDataCell(totalCriticalCases))
                 bottomTBody.firstElementChild.appendChild(createDataCell(totalCasesPerMillion))
                 bottomTBody.firstElementChild.appendChild(createDataCell(totalDeathsPerMillion))
+               
                 // bottomTBody.firstElementChild.appendChild(createDataCell(totalTests))
                 // bottomTBody.firstElementChild.appendChild(createDataCell(totalTestsPerMillion))
 
@@ -181,7 +190,8 @@ function fetchApiData(){
     }
     sortByCases(data);
 
-    data.forEach(covid => {
+    console.log(data.Countries)
+    data.Countries.forEach(covid => {
         const tr = document.createElement('tr');
         tr.classList.add('tr');
         
@@ -207,6 +217,7 @@ function fetchApiData(){
         }
 
         // calling addPlus and removeZero functions
+        console.log(covid)
         const plusAddedtodayCases = addPlus(covid.todayCases);
         const removedZeroDeaths = removeZero(covid.deaths)
         const plusAddedTodayDeaths = addPlus(covid.todayDeaths);
@@ -294,8 +305,6 @@ function fetchApiData(){
     })
     
 } 
-
-
 
 // calling main function
 document.addEventListener('DOMContentLoaded', () => { fetchApiData(); });
