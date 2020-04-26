@@ -1,6 +1,6 @@
 
 
-const tBody = document.querySelector('.fetch-content');
+const topTBody = document.querySelector('.fetch-content');
 const bottomTBody = document.querySelector('.bottom-sum');
 const tableHeading = document.querySelector('thead');
 
@@ -55,20 +55,20 @@ function fetchApiData(){
         const totalTestsPerMillion = addComma(summary.testsPerOneMillion);
 
 
-        tBody.firstElementChild.appendChild(createDataCell(totalCases));
-        tBody.firstElementChild.appendChild(createDataCell(totalNewCases));
-        tBody.firstElementChild.appendChild(createDataCell(totalOfDeaths));
-        tBody.firstElementChild.appendChild(createDataCell(totalNewDeaths));
-        tBody.firstElementChild.appendChild(createDataCell(totalOfRecovered));
-        tBody.firstElementChild.appendChild(createDataCell(totalOfActiveCases));
-        tBody.firstElementChild.appendChild(createDataCell(totalCriticalCases));
-        tBody.firstElementChild.appendChild(createDataCell(totalCasesPerMillion));
-        tBody.firstElementChild.appendChild(createDataCell(totalDeathsPerMillion));
+        topTBody.firstElementChild.appendChild(createDataCell(totalCases));
+        topTBody.firstElementChild.appendChild(createDataCell(totalNewCases));
+        topTBody.firstElementChild.appendChild(createDataCell(totalOfDeaths));
+        topTBody.firstElementChild.appendChild(createDataCell(totalNewDeaths));
+        topTBody.firstElementChild.appendChild(createDataCell(totalOfRecovered));
+        topTBody.firstElementChild.appendChild(createDataCell(totalOfActiveCases));
+        topTBody.firstElementChild.appendChild(createDataCell(totalCriticalCases));
+        topTBody.firstElementChild.appendChild(createDataCell(totalCasesPerMillion));
+        topTBody.firstElementChild.appendChild(createDataCell(totalDeathsPerMillion));
 
-        tBody.firstElementChild.appendChild(createDataCell(totalTests));
-        tBody.firstElementChild.appendChild(createDataCell(totalTestsPerMillion));
+        topTBody.firstElementChild.appendChild(createDataCell(totalTests));
+        topTBody.firstElementChild.appendChild(createDataCell(totalTestsPerMillion));
 
-        tBody.firstElementChild.style.background = "#dddddd";
+        topTBody.firstElementChild.style.background = "#dddddd";
         
         // styling new cases and new deaths cells 
 
@@ -193,7 +193,7 @@ function fetchApiData(){
         createDataCell(commaAddedTests);
         createDataCell(commaAddedTestsPerOneMillion);
 
-        tBody.appendChild(tr);
+        topTBody.appendChild(tr);
 
         // styling new cases and new deaths cells + styling international conveyances to distinguish them from other countries.
         if(newCases.textContent.includes('+')){

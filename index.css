@@ -37,7 +37,7 @@ h5 {
 }
 h5, .brief-paragraph {
     margin-left: 40px;
-    width: 50%;
+    max-width: 500px;
 }
 .countries-count, .bold {
     font-weight: 800;
@@ -83,7 +83,7 @@ section {
 
 }
 input[type=text] {
-  max-width: 25%;
+  max-width: 250px;
   padding: 12px 20px;
   box-sizing: border-box;
 }
@@ -102,15 +102,9 @@ th{
     position: sticky;
     top: -1px;
     background: #f2f2f2;
-
-    
 }
 
-thead tr {
-
-}
 thead {
-  
     -webkit-box-shadow: 6px 18px 11px -22px rgba(0,0,0,0.29);
     -moz-box-shadow: 6px 18px 11px -22px rgba(0,0,0,0.29);
     box-shadow: 6px 18px 11px -22px rgba(0,0,0,0.29);
