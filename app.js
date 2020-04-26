@@ -5,15 +5,12 @@ const bottomTBody = document.querySelector('.bottom-sum');
 const tableHeading = document.querySelector('thead');
 
 
-// console.log(topToTh)
 // fetching confirmed, recovered and total deaths
 
-// http://api.coronastatistics.live/all
 function fetchApiData(){
         fetch('https://corona.lmao.ninja/v2/all').then((response) => {
         return response.json();
     }).then(summary => {
-        console.log(summary)
         document.querySelector('.countries-count').textContent = summary.affectedCountries;
         function addComma(x){
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -23,7 +20,6 @@ function fetchApiData(){
         const totalRecovered = document.getElementsByClassName('recovered-cases')[0];
         const totalDeaths = document.getElementsByClassName('death-cases')[0];
 
-        console.log(summary.affectedCountries)
         totalConfirmed.innerHTML = addComma(summary.cases);
         totalRecovered.innerHTML = addComma(summary.recovered);
         totalDeaths.innerHTML = addComma(summary.deaths);
@@ -42,11 +38,9 @@ function fetchApiData(){
         }   
 
         function addComma(x){
-            console.log(x)
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-        console.log(summary)
-        // console.log(summary)
+
         // countriesData
         const totalCases = addComma(summary.cases);
         const totalNewCases = addComma(summary.todayCases);
@@ -88,14 +82,13 @@ function fetchApiData(){
 
         bottomTBody.firstElementChild.appendChild(createDataCell(totalCases))
         bottomTBody.firstElementChild.appendChild(colorAddedtotalNewCases)
-        bottomTBody.firstElementChild.appendChild(createDataCell(totalDeaths))
+        bottomTBody.firstElementChild.appendChild(createDataCell(totalOfDeaths))
         bottomTBody.firstElementChild.appendChild(colorAddedtotalNewDeaths)
-        bottomTBody.firstElementChild.appendChild(createDataCell(totalRecovered))
+        bottomTBody.firstElementChild.appendChild(createDataCell(totalOfRecovered))
         bottomTBody.firstElementChild.appendChild(createDataCell(totalActiveCases))
         bottomTBody.firstElementChild.appendChild(createDataCell(totalCriticalCases))
         bottomTBody.firstElementChild.appendChild(createDataCell(totalCasesPerMillion))
         bottomTBody.firstElementChild.appendChild(createDataCell(totalDeathsPerMillion))
-       
         bottomTBody.firstElementChild.appendChild(createDataCell(totalTests))
         bottomTBody.firstElementChild.appendChild(createDataCell(totalTestsPerMillion))
     })
@@ -103,106 +96,22 @@ function fetchApiData(){
         fetch('https://corona.lmao.ninja/v2/countries/').then(response => {
             return response.json();
         })
-        .then(countriesData => {
-            console.log(countriesData)
-            // calculating all cases and adding the total (world) section at the top and the end of the table
-            // let tCases = 0;
-            // let tNewCases = 0;
-            // let tDeaths = 0;
-            // let tNDeaths = 0;
-            // let tRecovered  = 0;
-            // let tActiveCases = 0;
-            // let tCriticalCases = 0;
-            // let tCasesPMillion = 0;
-            // let tDeathsPMillion = 0;
-            // let tTests = 0;
-            // let tTestsPMillion = 0;
-            // let obj = {};
-
-            // function sumWorldData(
-            //      cases,
-            //      newCases,
-            //      deaths,
-            //      todayDeaths,
-            //      recovered,
-            //      active,
-            //      critical,
-            //      casesPerOneMillion,
-            //      deathsPerOneMillion,
-            //     //  tests,
-            //     //  testsPerOneMillion   
-            //      ){
-
-            //     // here 't' means total
-            //     tCases += cases;
-            //     tNewCases += newCases;
-            //     tDeaths += deaths;
-            //     tNDeaths += todayDeaths;
-            //     tRecovered += recovered;
-            //     tActiveCases += active;
-            //     tCriticalCases += critical;
-            //     tCasesPMillion += casesPerOneMillion;
-            //     tDeathsPMillion += deathsPerOneMillion;
-
-                
-                // tTests += tests;
-                // tTestsPMillion += testsPerOneMillion;
-                
-                // obj.totalCases = tCases;
-                // obj.totalNewCases = tNewCases;
-                // obj.totalDeaths = tDeaths;
-                // obj.totalNewDeaths = tNDeaths;
-                // obj.totalRecovered = tRecovered;
-                // obj.totalActiveCases = tActiveCases;
-                // obj.totalCriticalCases = tCriticalCases;
-                // obj.totalCasesPerMillion = tCasesPMillion.toFixed(2);
-                // obj.totalDeathsPerMillion = tDeathsPMillion.toFixed(2);
-                // obj.totalTests = tTests;
-                // obj.totalTestsPerMillion = tTestsPMillion;
-            
-
-
-            // console.log(data)
-            // for(let i = 0; i < data.length; i ++){
-            //     sumWorldData(
-            //          data[i].cases,
-            //          data[i].todayCases,
-            //          data[i].deaths,
-            //          data[i].todayDeaths,
-            //          data[i].recovered,
-            //          data[i].active,
-            //          data[i].critical,
-            //          data[i].casesPerOneMillion,
-            //          data[i].deathsPerOneMillion,
-            //         //  data[i].tests,
-            //         //  data[i].testsPerOneMillion
-            //     );}
-            //     const tr = document.createElement('tr');  
-
-
-        //     function countriesCount(){
-        //     let i;
-        //     for(i = 0; i < data.length - 2; i++){}
-        //     return i;
-        // }
-        // // console.log(data)
-            populateCountryData(countriesData);
-        })
+        .then(countriesData => populateCountryData(countriesData))
     }
 
     function populateCountryData(data){
 
         // sorting by cases
         function sortByCases(data){
-        data.sort(function(a, b){
+            data.sort(function(a, b){
             return b.cases - a.cases;
         })
     }
-    sortByCases(data);
+        sortByCases(data);
 
-    // console.log(data)
-    data.forEach(covid => {
-        // console.log(covid)
+
+        data.forEach(covid => {
+
         const tr = document.createElement('tr');
         tr.classList.add('tr');
         
@@ -228,7 +137,7 @@ function fetchApiData(){
         }
 
         // calling addPlus and removeZero functions
-        // console.log(covid)
+
         const plusAddedtodayCases = addPlus(covid.todayCases);
         const removedZeroDeaths = removeZero(covid.deaths)
         const plusAddedTodayDeaths = addPlus(covid.todayDeaths);
