@@ -116,66 +116,66 @@ function fetchApiData(){
                     return td;
                 }   
 
-                function addComma(x){
-                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                }
-                const totalCases = addComma(obj.totalCases);
-                const totalNewCases = addComma(obj.totalNewCases);
-                const totalDeaths = addComma(obj.totalDeaths);
-                const totalNewDeaths = addComma(obj.totalNewDeaths);
-                const totalRecovered = addComma(obj.totalRecovered);
-                const totalActiveCases = addComma(obj.totalActiveCases);
-                const totalCriticalCases = addComma(obj.totalCriticalCases);
-                const totalCasesPerMillion = addComma(obj.totalCasesPerMillion);
-                const totalDeathsPerMillion = addComma(obj.totalDeathsPerMillion);
-                const totalTests = addComma(obj.totalTests);
-                const totalTestsPerMillion = addComma(obj.totalTestsPerMillion);
+                // function addComma(x){
+                //     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                // }
+                // const totalCases = addComma(obj.totalCases);
+                // const totalNewCases = addComma(obj.totalNewCases);
+                // const totalDeaths = addComma(obj.totalDeaths);
+                // const totalNewDeaths = addComma(obj.totalNewDeaths);
+                // const totalRecovered = addComma(obj.totalRecovered);
+                // const totalActiveCases = addComma(obj.totalActiveCases);
+                // const totalCriticalCases = addComma(obj.totalCriticalCases);
+                // const totalCasesPerMillion = addComma(obj.totalCasesPerMillion);
+                // const totalDeathsPerMillion = addComma(obj.totalDeathsPerMillion);
+                // const totalTests = addComma(obj.totalTests);
+                // const totalTestsPerMillion = addComma(obj.totalTestsPerMillion);
 
 
-                tBody.firstElementChild.appendChild(createDataCell(totalCases));
-                tBody.firstElementChild.appendChild(createDataCell(totalNewCases));
-                tBody.firstElementChild.appendChild(createDataCell(totalDeaths));
-                tBody.firstElementChild.appendChild(createDataCell(totalNewDeaths));
-                tBody.firstElementChild.appendChild(createDataCell(totalRecovered));
-                tBody.firstElementChild.appendChild(createDataCell(totalActiveCases));
-                tBody.firstElementChild.appendChild(createDataCell(totalCriticalCases));
-                tBody.firstElementChild.appendChild(createDataCell(totalCasesPerMillion));
-                tBody.firstElementChild.appendChild(createDataCell(totalDeathsPerMillion));
+                // tBody.firstElementChild.appendChild(createDataCell(totalCases));
+                // tBody.firstElementChild.appendChild(createDataCell(totalNewCases));
+                // tBody.firstElementChild.appendChild(createDataCell(totalDeaths));
+                // tBody.firstElementChild.appendChild(createDataCell(totalNewDeaths));
+                // tBody.firstElementChild.appendChild(createDataCell(totalRecovered));
+                // tBody.firstElementChild.appendChild(createDataCell(totalActiveCases));
+                // tBody.firstElementChild.appendChild(createDataCell(totalCriticalCases));
+                // tBody.firstElementChild.appendChild(createDataCell(totalCasesPerMillion));
+                // tBody.firstElementChild.appendChild(createDataCell(totalDeathsPerMillion));
 
                 // tBody.firstElementChild.appendChild(createDataCell(totalTests));
                 // tBody.firstElementChild.appendChild(createDataCell(totalTestsPerMillion));
 
-                tBody.firstElementChild.style.background = "#dddddd";
+                // // tBody.firstElementChild.style.background = "#dddddd";
                 
                 // styling new cases and new deaths cells 
 
-                const colorAddedtotalNewCases = createDataCell(totalNewCases);
-                const colorAddedtotalNewDeaths = createDataCell(totalNewDeaths);
-                colorAddedtotalNewCases.style.background = "#f4f9a7";
-                colorAddedtotalNewDeaths.style.background = "#ff0000";
-                colorAddedtotalNewDeaths.style.color = "#ffffff";
+                // const colorAddedtotalNewCases = createDataCell(totalNewCases);
+                // const colorAddedtotalNewDeaths = createDataCell(totalNewDeaths);
+                // colorAddedtotalNewCases.style.background = "#f4f9a7";
+                // colorAddedtotalNewDeaths.style.background = "#ff0000";
+                // colorAddedtotalNewDeaths.style.color = "#ffffff";
 
                 // bottom of the table total section
 
-                bottomTBody.firstElementChild.appendChild(createDataCell(totalCases))
-                bottomTBody.firstElementChild.appendChild(colorAddedtotalNewCases)
-                bottomTBody.firstElementChild.appendChild(createDataCell(totalDeaths))
-                bottomTBody.firstElementChild.appendChild(colorAddedtotalNewDeaths)
-                bottomTBody.firstElementChild.appendChild(createDataCell(totalRecovered))
-                bottomTBody.firstElementChild.appendChild(createDataCell(totalActiveCases))
-                bottomTBody.firstElementChild.appendChild(createDataCell(totalCriticalCases))
-                bottomTBody.firstElementChild.appendChild(createDataCell(totalCasesPerMillion))
-                bottomTBody.firstElementChild.appendChild(createDataCell(totalDeathsPerMillion))
+                // bottomTBody.firstElementChild.appendChild(createDataCell(totalCases))
+                // bottomTBody.firstElementChild.appendChild(colorAddedtotalNewCases)
+                // bottomTBody.firstElementChild.appendChild(createDataCell(totalDeaths))
+                // bottomTBody.firstElementChild.appendChild(colorAddedtotalNewDeaths)
+                // bottomTBody.firstElementChild.appendChild(createDataCell(totalRecovered))
+                // bottomTBody.firstElementChild.appendChild(createDataCell(totalActiveCases))
+                // bottomTBody.firstElementChild.appendChild(createDataCell(totalCriticalCases))
+                // bottomTBody.firstElementChild.appendChild(createDataCell(totalCasesPerMillion))
+                // bottomTBody.firstElementChild.appendChild(createDataCell(totalDeathsPerMillion))
                
                 // bottomTBody.firstElementChild.appendChild(createDataCell(totalTests))
                 // bottomTBody.firstElementChild.appendChild(createDataCell(totalTestsPerMillion))
 
-            function countriesCount(){
-            let i;
-            for(i = 0; i < data.length - 2; i++){}
-            return i;
-        }
-        document.querySelector('.countries-count').textContent = countriesCount();
+        //     function countriesCount(){
+        //     let i;
+        //     for(i = 0; i < data.length - 2; i++){}
+        //     return i;
+        // }
+        // document.querySelector('.countries-count').textContent = countriesCount();
             populateCountryData(data);
         })
     }
@@ -190,8 +190,9 @@ function fetchApiData(){
     }
     sortByCases(data);
 
-    console.log(data.Countries)
-    data.Countries.forEach(covid => {
+    console.log(data)
+    data.forEach(covid => {
+        console.log(covid)
         const tr = document.createElement('tr');
         tr.classList.add('tr');
         
