@@ -237,8 +237,8 @@ function fetchApiData(){
         const removedZeroCriticalCases = removeZero(covid.critical)
         const removedZeroCasesPerOneMillionCases = removeZero(covid.casesPerOneMillion)
         const removedZeroDeathsPerOneMillionCases = removeZero(covid.deathsPerOneMillion)
-        // const removedZeroCasesTested = removeZero(covid.tests)
-        // const removedZeroPerOneMillionTestedCases = removeZero(covid.testsPerOneMillion)
+        const removedZeroCasesTested = removeZero(covid.tests)
+        const removedZeroPerOneMillionTestedCases = removeZero(covid.testsPerOneMillion)
 
         // injecting data to the table
         // function that creates td's and appends td in to tr
@@ -267,8 +267,8 @@ function fetchApiData(){
         const commaAddedCriticalCases = addComma(removedZeroCriticalCases);
         const commaAddedPerOneMillionCases = addComma(removedZeroCasesPerOneMillionCases);
         const commaAddedPerOneMillionDeaths = addComma(removedZeroDeathsPerOneMillionCases);
-        // const commaAddedTests = addComma(removedZeroCasesTested);
-        // const commaAddedTestsPerOneMillion = addComma(removedZeroPerOneMillionTestedCases);
+        const commaAddedTests = addComma(removedZeroCasesTested);
+        const commaAddedTestsPerOneMillion = addComma(removedZeroPerOneMillionTestedCases);
             
             
         const countries = createDataCell(covid.country).children[0];
@@ -281,8 +281,8 @@ function fetchApiData(){
         createDataCell(commaAddedCriticalCases);
         createDataCell(commaAddedPerOneMillionCases);
         createDataCell(commaAddedPerOneMillionDeaths);
-        // createDataCell(commaAddedTests);
-        // createDataCell(commaAddedTestsPerOneMillion);
+        createDataCell(commaAddedTests);
+        createDataCell(commaAddedTestsPerOneMillion);
 
         tBody.appendChild(tr);
 
