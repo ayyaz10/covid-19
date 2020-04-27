@@ -48,6 +48,10 @@ h2.confirmed-cases-heading, h2.recovered-cases-heading, h2.death-cases-heading  
     color: #444444;
 }
 
+.last-update-section {
+    color: gray;
+    text-align: center;
+}
 
 
 span.confirmed-cases, span.recovered-cases, span.death-cases {

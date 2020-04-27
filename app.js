@@ -11,6 +11,10 @@ function fetchApiData(){
         fetch('https://corona.lmao.ninja/v2/all').then((response) => {
         return response.json();
     }).then(summary => {
+        const update = new Date(summary.updated)
+        console.log(summary.updated)
+        document.querySelector('.last-update').textContent = update;
+        // update.getDate() + '/' + (update.getMonth()+1) + '/' + update.getFullYear();
         document.querySelector('.countries-count').textContent = summary.affectedCountries;
         function addComma(x){
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
