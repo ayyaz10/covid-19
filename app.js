@@ -44,7 +44,17 @@ function fetchApiData(){
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
-        // countriesData
+        function addPlus(input){
+            if(input === 0){
+                input = "";
+                return input;
+            } 
+             else {
+                return `+${input}`;
+            }
+        }
+
+        // countries data
         const totalCases = addComma(summary.cases);
         const totalNewCases = addComma(summary.todayCases);
         const totalOfDeaths = addComma(summary.deaths);
@@ -57,32 +67,37 @@ function fetchApiData(){
         const totalTests = addComma(summary.tests);
         const totalTestsPerMillion = addComma(summary.testsPerOneMillion);
 
+        const plusAddedTotalNewCases = addPlus(totalNewCases);
+        const plusAddedTotalNewDeaths = addPlus(totalNewDeaths);
 
         topTBody.firstElementChild.appendChild(createDataCell(totalCases));
-        topTBody.firstElementChild.appendChild(createDataCell(totalNewCases));
+        topTBody.firstElementChild.appendChild(createDataCell(plusAddedTotalNewCases));
         topTBody.firstElementChild.appendChild(createDataCell(totalOfDeaths));
-        topTBody.firstElementChild.appendChild(createDataCell(totalNewDeaths));
+        topTBody.firstElementChild.appendChild(createDataCell(plusAddedTotalNewDeaths));
         topTBody.firstElementChild.appendChild(createDataCell(totalOfRecovered));
         topTBody.firstElementChild.appendChild(createDataCell(totalOfActiveCases));
         topTBody.firstElementChild.appendChild(createDataCell(totalCriticalCases));
         topTBody.firstElementChild.appendChild(createDataCell(totalCasesPerMillion));
         topTBody.firstElementChild.appendChild(createDataCell(totalDeathsPerMillion));
-
         topTBody.firstElementChild.appendChild(createDataCell(totalTests));
         topTBody.firstElementChild.appendChild(createDataCell(totalTestsPerMillion));
 
         topTBody.firstElementChild.style.background = "#dddddd";
-        
-        // styling new cases and new deaths cells 
 
-        const colorAddedtotalNewCases = createDataCell(totalNewCases);
-        const colorAddedtotalNewDeaths = createDataCell(totalNewDeaths);
+        // adding plus "+" to the bottom new cases and new deaths cells
+        const bottomPlusAddedTotalNewCases = addPlus(totalNewCases);
+        const bottomPlusAddedTotalNewDeaths = addPlus(totalNewDeaths);
+
+        // styling new cases and new deaths cells 
+        const colorAddedtotalNewCases = createDataCell(bottomPlusAddedTotalNewCases);
+        const colorAddedtotalNewDeaths = createDataCell(bottomPlusAddedTotalNewDeaths);
         colorAddedtotalNewCases.style.background = "#f4f9a7";
         colorAddedtotalNewDeaths.style.background = "#ff0000";
         colorAddedtotalNewDeaths.style.color = "#ffffff";
+        console.log(colorAddedtotalNewCases.textContent)
+
 
         // bottom of the table total section
-
         bottomTBody.firstElementChild.appendChild(createDataCell(totalCases))
         bottomTBody.firstElementChild.appendChild(colorAddedtotalNewCases)
         bottomTBody.firstElementChild.appendChild(createDataCell(totalOfDeaths))
@@ -112,9 +127,7 @@ function fetchApiData(){
     }
         sortByCases(data);
 
-
         data.forEach(covid => {
-
         const tr = document.createElement('tr');
         tr.classList.add('tr');
         
