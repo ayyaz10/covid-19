@@ -182,7 +182,7 @@ function fetchApiData(){
         const commaAddedTests = addComma(removedZeroCasesTested);
         const commaAddedTestsPerOneMillion = addComma(removedZeroPerOneMillionTestedCases);
             
-            
+            // console.log(commaAddedCases)
         const countries = createDataCell(covid.country).children[0];
         createDataCell(commaAddedCases);
         const newCases = createDataCell(commaAddedTodayCases).children[2];
@@ -198,7 +198,7 @@ function fetchApiData(){
 
         topTBody.appendChild(tr);
 
-        // styling new cases and new deaths cells + styling international conveyances to distinguish them from other countries.
+        // styling --> styling new cases and new deaths cells + styling international conveyances to distinguish them from other countries.
         if(newCases.textContent.includes('+')){
             newCases.style.background = "#f4f9a7";
         } 
@@ -208,6 +208,12 @@ function fetchApiData(){
         } else if (covid.country.toLowerCase().includes('diamond princess') || covid.country.toLowerCase().includes('ms zaandam')){
             countries.style.color= "blue";
             countries.style.fontStyle = "italic";
+        }
+
+        // styling --> adding background color to the countries that have no cases left
+
+        if(commaAddedCases === commaAddedRecoveredCases) {
+            tr.style.background = "#baf1a1";
         }
     });  
 
@@ -226,7 +232,6 @@ function fetchApiData(){
             }
         }
     })
-    
 } 
 
 // calling main function
