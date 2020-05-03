@@ -2,7 +2,7 @@
     document.querySelector(".main").style.display = "none";
     document.querySelector("#load").classList.add('ldio-633k9nv1itq');
 
-    myVar = setTimeout(showPage, 3000);
+    myVar = setTimeout(showPage, 2000);
 
     function showPage() {
         document.querySelector("#load").classList.remove('ldio-633k9nv1itq');
