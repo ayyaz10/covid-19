@@ -2,7 +2,7 @@
     document.querySelector(".main").style.display = "none";
     document.querySelector("#load").classList.add('ldio-633k9nv1itq');
 
-    myVar = setTimeout(showPage, 2000);
+    myVar = setTimeout(showPage, 1500);
 
     function showPage() {
         document.querySelector("#load").classList.remove('ldio-633k9nv1itq');
@@ -24,6 +24,7 @@ function fetchApiData(){
         console.log(summary.updated)
         document.querySelector('.last-update').textContent = update;
         document.querySelector('.countries-count').textContent = summary.affectedCountries;
+
         function addComma(x){
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
@@ -103,7 +104,6 @@ function fetchApiData(){
         colorAddedtotalNewCases.style.background = "#f4f9a7";
         colorAddedtotalNewDeaths.style.background = "#ff0000";
         colorAddedtotalNewDeaths.style.color = "#ffffff";
-        console.log(colorAddedtotalNewCases.textContent)
 
 
         // bottom of the table total section
@@ -118,7 +118,7 @@ function fetchApiData(){
         bottomTBody.firstElementChild.appendChild(createDataCell(totalDeathsPerMillion))
         bottomTBody.firstElementChild.appendChild(createDataCell(totalTests))
         bottomTBody.firstElementChild.appendChild(createDataCell(totalTestsPerMillion))
-    })
+    });
 
         fetch('https://corona.lmao.ninja/v2/countries/').then(response => {
             return response.json();
@@ -191,6 +191,16 @@ function fetchApiData(){
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
+        // Adding background color of #b7b7b7 (light gray) to those countries who have no cases left but have more then zero deaths
+        if(covid.cases === (covid.deaths) + (covid.recovered) && covid.deaths > 0) {
+            tr.style.background = "#dddddd";
+        }
+
+        // styling --> adding background color to the countries that have no cases left
+        if(covid.cases === covid.recovered) {
+            tr.style.background = "#baf1a1";
+        }
+
         // calling addComma function in order to add comma to each column
         const commaAddedCases = addComma(covid.cases);
         const commaAddedTodayCases = addComma(plusAddedtodayCases);
@@ -203,8 +213,7 @@ function fetchApiData(){
         const commaAddedPerOneMillionDeaths = addComma(removedZeroDeathsPerOneMillionCases);
         const commaAddedTests = addComma(removedZeroCasesTested);
         const commaAddedTestsPerOneMillion = addComma(removedZeroPerOneMillionTestedCases);
-            
-            // console.log(commaAddedCases)
+
         const countries = createDataCell(covid.country).children[0];
         createDataCell(commaAddedCases);
         const newCases = createDataCell(commaAddedTodayCases).children[2];
@@ -224,18 +233,12 @@ function fetchApiData(){
         if(newCases.textContent.includes('+')){
             newCases.style.background = "#f4f9a7";
         } 
-        if( newDeaths.textContent.includes('+')){
+        if(newDeaths.textContent.includes('+')){
             newDeaths.style.background = "#ff0000";
             newDeaths.style.color = "#ffffff";
         } else if (covid.country.toLowerCase().includes('diamond princess') || covid.country.toLowerCase().includes('ms zaandam')){
             countries.style.color= "blue";
             countries.style.fontStyle = "italic";
-        }
-
-        // styling --> adding background color to the countries that have no cases left
-
-        if(commaAddedCases === commaAddedRecoveredCases) {
-            tr.style.background = "#baf1a1";
         }
     });  
 
