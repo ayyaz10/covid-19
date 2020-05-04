@@ -2,7 +2,7 @@
     document.querySelector(".main").style.display = "none";
     document.querySelector("#load").classList.add('ldio-633k9nv1itq');
 
-    myVar = setTimeout(showPage, 1500);
+    myVar = setTimeout(showPage, 0);
 
     function showPage() {
         document.querySelector("#load").classList.remove('ldio-633k9nv1itq');
@@ -36,13 +36,18 @@ function fetchApiData(){
         totalConfirmed.innerHTML = addComma(summary.cases);
         totalRecovered.innerHTML = addComma(summary.recovered);
         totalDeaths.innerHTML = addComma(summary.deaths);
+        totalCasesPerOneMillion = addComma(summary.casesPerOneMillion);
+        totalDeathsPerOneMillion = addComma(summary.deathsPerOneMillion)
+        
 
         const totalActiveCases = summary.cases - (summary.recovered + summary.deaths);
         const totalClosedCases = summary.recovered  + summary.deaths;
 
         document.getElementsByClassName('active-cases')[0].innerHTML = addComma(totalActiveCases)
         document.getElementsByClassName('closed-cases')[0].innerHTML = addComma(totalClosedCases);
-
+        document.getElementsByClassName('casesPM')[0].innerHTML = totalCasesPerOneMillion;
+        document.getElementsByClassName('deathsPM')[0].innerHTML = totalDeathsPerOneMillion
+        console.log(totalDeathsPerOneMillion)
         
         function createDataCell(cellData){
             const td = document.createElement('td');
@@ -191,7 +196,7 @@ function fetchApiData(){
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
-        // Adding background color of #b7b7b7 (light gray) to those countries who have no cases left but have more then zero deaths
+        // Adding background color of #dddddd (light gray) to those countries who have no cases left but have more then zero deaths
         if(covid.cases === (covid.deaths) + (covid.recovered) && covid.deaths > 0) {
             tr.style.background = "#dddddd";
         }
