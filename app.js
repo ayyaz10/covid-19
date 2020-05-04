@@ -2,7 +2,7 @@
     document.querySelector(".main").style.display = "none";
     document.querySelector("#load").classList.add('ldio-633k9nv1itq');
 
-    myVar = setTimeout(showPage, 0);
+    myVar = setTimeout(showPage, 1500);
 
     function showPage() {
         document.querySelector("#load").classList.remove('ldio-633k9nv1itq');
@@ -21,7 +21,6 @@ function fetchApiData(){
         return response.json();
     }).then(summary => {
         const update = new Date(summary.updated)
-        console.log(summary.updated)
         document.querySelector('.last-update').textContent = update;
         document.querySelector('.countries-count').textContent = summary.affectedCountries;
 
@@ -47,7 +46,6 @@ function fetchApiData(){
         document.getElementsByClassName('closed-cases')[0].innerHTML = addComma(totalClosedCases);
         document.getElementsByClassName('casesPM')[0].innerHTML = totalCasesPerOneMillion;
         document.getElementsByClassName('deathsPM')[0].innerHTML = totalDeathsPerOneMillion
-        console.log(totalDeathsPerOneMillion)
         
         function createDataCell(cellData){
             const td = document.createElement('td');
