@@ -107,8 +107,9 @@ function populateCountryData(countriesDataArray) {
   }
   sortByCases(countriesDataArray);
 
-  countriesDataArray.forEach((each) => {
-    const countryData = each[1].All;
+  for (let i = 0; i < countriesDataArray.length - 1; i++) {
+    const countryData = countriesDataArray[i][1].All;
+    console.log(countryData);
     const confirmed = countryData.confirmed;
     const deaths = countryData.deaths;
     const recovered = countryData.recovered;
@@ -138,7 +139,7 @@ function populateCountryData(countriesDataArray) {
     const commaAddedCases = addComma(confirmed);
     const commaAddedDeaths = addComma(deaths);
     const commaAddedRecoveredCases = addComma(recovered);
-    const countries = createDataCell(each[0]).children[0];
+    const countries = createDataCell(countriesDataArray[i][0]).children[0];
     createDataCell(commaAddedCases);
     createDataCell(commaAddedDeaths);
     createDataCell(commaAddedRecoveredCases);
@@ -146,7 +147,7 @@ function populateCountryData(countriesDataArray) {
     createDataCell("N/A");
 
     topTBody.appendChild(tr);
-  });
+  }
 
   // adding search functionality
   let input = document.querySelector(".search-box");
