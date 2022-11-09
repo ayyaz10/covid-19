@@ -109,7 +109,6 @@ function populateCountryData(countriesDataArray) {
 
   for (let i = 0; i < countriesDataArray.length - 1; i++) {
     const countryData = countriesDataArray[i][1].All;
-    console.log(countryData);
     const confirmed = countryData.confirmed;
     const deaths = countryData.deaths;
     const recovered = countryData.recovered;
