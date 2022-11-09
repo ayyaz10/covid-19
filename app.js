@@ -24,6 +24,14 @@ const options = {
     "X-RapidAPI-Key": "d89e92b60emsh6ce448c7f44e1edp16dd17jsn866e60a9c9bb",
   },
 };
+
+// function that adds Commas in numbers
+function addComma(x) {
+  if (x === null) {
+    x = "";
+  }
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 async function fetchApiData() {
   const worldResponse = await fetch(worldDataUrl, options);
   const countryResponse = await fetch(countriesDataUrl);
@@ -57,19 +65,6 @@ async function fetchApiData() {
     const td = document.createElement("td");
     td.textContent = cellData;
     return td;
-  }
-
-  function addComma(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-
-  function addPlus(input) {
-    if (input === 0) {
-      input = "";
-      return input;
-    } else {
-      return `+${input}`;
-    }
   }
 
   topTBody.firstElementChild.appendChild(
@@ -114,33 +109,12 @@ function populateCountryData(countriesDataArray) {
 
   countriesDataArray.forEach((each) => {
     const countryData = each[1].All;
-    console.log(countryData);
     const confirmed = countryData.confirmed;
     const deaths = countryData.deaths;
     const recovered = countryData.recovered;
-    // console.log(each);
     const tr = document.createElement("tr");
     tr.classList.add("tr");
 
-    // adding '+' sign to new to today new cases and today new deaths
-    function addPlus(input) {
-      if (input === 0) {
-        input = "";
-        return input;
-      } else {
-        return `+${input}`;
-      }
-    }
-
-    // function that removes zero
-    function removeZero(input) {
-      if (input === 0) {
-        input = "";
-        return input;
-      } else {
-        return input;
-      }
-    }
     // injecting data to the table
     // function that creates td's and appends td in to tr
     function createDataCell(cellData) {
@@ -148,14 +122,6 @@ function populateCountryData(countriesDataArray) {
       td.textContent = cellData;
       tr.appendChild(td);
       return tr;
-    }
-
-    // function that adds Commas in numbers
-    function addComma(x) {
-      if (x === null) {
-        x = "";
-      }
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
     // Adding background color of #dddddd (light gray) to those countries who have no cases left but have more then zero deaths
