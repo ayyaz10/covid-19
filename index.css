@@ -75,6 +75,7 @@ span.recovered-cases {
 }
 span.death-cases {
     color: #606060;
+    margin-bottom: 20px;
 }
 
 
