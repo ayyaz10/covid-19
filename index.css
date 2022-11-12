@@ -26,6 +26,7 @@ header {
 
 h1 {
     font-size: 3rem;
+    font-weight: 600;
 }
 
 h1, h2 {
@@ -228,7 +229,11 @@ input[type=text]:not(.browser-default) {
         padding: 0 20px 0 20px;;
     }
     h1 {
-        font-size: 2.8rem;;
+        font-size: 2.3rem;;
+    }
+
+    h2 {
+        margin: 1rem 0 .8rem 0;
     }
 
     h4 {
@@ -242,9 +247,12 @@ input[type=text]:not(.browser-default) {
 
 
     .recovered-cases-heading, .span.confirmed-cases-heading, .death-cases-heading, span.confirmed-cases, span.recovered-cases, span.death-cases {
-        font-size: 2.6rem;
+        font-size: 2.1rem;
     }
-
+    .search-field {
+        justify-content: flex-start;
+        margin-top: 1rem;
+    }
     .active-cases {
         font-size: 1.1rem;
     }
