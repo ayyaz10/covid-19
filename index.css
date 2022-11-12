@@ -233,7 +233,7 @@ input[type=text]:not(.browser-default) {
     }
 
     h2 {
-        margin: 1rem 0 .8rem 0;
+        margin: 1rem 0 .8rem 0 !important;
     }
 
     h4 {
