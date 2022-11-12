@@ -67,6 +67,11 @@ span.confirmed-cases, span.recovered-cases, span.death-cases {
     font-weight: 800;
     text-align: center;   
 }
+
+.span.death-cases {
+    margin-bottom: 1.2rem;
+}
+
 span.confirmed-cases {
     color: #9c9c9c;
 }
