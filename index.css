@@ -25,7 +25,7 @@ header {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 2.8rem;
     font-weight: 600;
 }
 
@@ -44,14 +44,14 @@ h4 {
 }
 h5, .brief-paragraph {
     /* margin-left: 50px; */
-    max-width: 500px;
+    max-width: 650px;
 }
 .countries-count, .bold {
     font-weight: 800;
 }
 
 h2.confirmed-cases-heading, h2.recovered-cases-heading, h2.death-cases-heading  {
-    font-size: 3.1rem;
+    font-size: 2.6rem;
     color: #444444;
 }
 
@@ -63,7 +63,7 @@ h2.confirmed-cases-heading, h2.recovered-cases-heading, h2.death-cases-heading  
 
 span.confirmed-cases, span.recovered-cases, span.death-cases {
     display: block;
-    font-size: 3.5rem;
+    font-size: 2.6rem;
     font-weight: 800;
     text-align: center;   
 }
