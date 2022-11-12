@@ -247,7 +247,7 @@ input[type=text]:not(.browser-default) {
 
 
     .recovered-cases-heading, .span.confirmed-cases-heading, .death-cases-heading, span.confirmed-cases, span.recovered-cases, span.death-cases {
-        font-size: 2.1rem;
+        font-size: 2.1rem !important;
     }
     .search-field {
         justify-content: flex-start;
