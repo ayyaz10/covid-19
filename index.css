@@ -227,8 +227,8 @@ input[type=text]:not(.browser-default) {
     section {
         padding: 0 20px 0 20px;;
     }
-    h1, h2 {
-        font-size: 2.4rem;;
+    h1 {
+        font-size: 2.8rem;;
     }
 
     h4 {
@@ -237,11 +237,12 @@ input[type=text]:not(.browser-default) {
     
     h5 {
         margin-top: 40px;
-        font-size: 40px;;
+        font-size: 1.7rem;
     }
 
-    .span.confirmed-cases {
-        font-size: 2.8rem;
+
+    .recovered-cases-heading, .span.confirmed-cases-heading, .death-cases-heading, span.confirmed-cases, span.recovered-cases, span.death-cases {
+        font-size: 2.6rem;
     }
 
     .active-cases {
