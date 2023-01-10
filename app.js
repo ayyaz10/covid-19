@@ -16,7 +16,7 @@ const tableHeading = document.querySelector("thead");
 // fetching confirmed, recovered and total deaths
 
 const worldDataUrl = "https://covid-19-statistics.p.rapidapi.com/reports/total";
-const countriesDataUrl = "https://covid-api.mmediagroup.fr/v1/cases";
+const countriesDataUrl = "https://disease.sh/v3/covid-19/countries";
 const options = {
   method: "GET",
   headers: {
@@ -38,13 +38,12 @@ async function fetchApiData() {
   const worldDataSummary = await worldResponse.json();
   const countryDataSummary = await countryResponse.json();
   let countriesDataArray = Object.entries(countryDataSummary);
+  console.log(worldDataSummary);
   populateCountryData(countriesDataArray);
   showPage();
   // const update = new Date(summary.Afghanistan.All.updated);
   document.querySelector(".last-update").textContent =
-    countryDataSummary.Afghanistan.All.updated;
-  // document.querySelector(".countries-count").textContent =
-  //   summary.affectedCountries;
+    worldDataSummary.data.date;
 
   let countriesData;
   const totalConfirmed = document.getElementsByClassName("confirmed-cases")[0];
@@ -107,9 +106,9 @@ function populateCountryData(countriesDataArray) {
   }
   sortByCases(countriesDataArray);
 
-  for (let i = 0; i < countriesDataArray.length - 1; i++) {
-    const countryData = countriesDataArray[i][1].All;
-    const confirmed = countryData.confirmed;
+  for (let i = 0; i < countriesDataArray.length; i++) {
+    const countryData = countriesDataArray[i][1];
+    const confirmed = countryData.cases;
     const deaths = countryData.deaths;
     const recovered = countryData.recovered;
     const tr = document.createElement("tr");
@@ -138,7 +137,7 @@ function populateCountryData(countriesDataArray) {
     const commaAddedCases = addComma(confirmed);
     const commaAddedDeaths = addComma(deaths);
     const commaAddedRecoveredCases = addComma(recovered);
-    const countries = createDataCell(countriesDataArray[i][0]).children[0];
+    createDataCell(countryData.country);
     createDataCell(commaAddedCases);
     createDataCell(commaAddedDeaths);
     createDataCell(commaAddedRecoveredCases);
@@ -147,7 +146,8 @@ function populateCountryData(countriesDataArray) {
 
     topTBody.appendChild(tr);
   }
-
+  document.querySelector(".countries-count").textContent =
+    countriesDataArray.length - 1;
   // adding search functionality
   let input = document.querySelector(".search-box");
 
