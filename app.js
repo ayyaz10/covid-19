@@ -4,7 +4,7 @@ document.querySelector("#load").classList.add("ldio-633k9nv1itq");
 
 
 function showPage() {
-  document.querySelector("#load").classList.remove("ldio-633k9nv1itq");
+;
   document.querySelector(".main").style.display = "block";
 }
 
