@@ -1,4 +1,4 @@
-let myVar;
+
 document.querySelector(".main").style.display = "none";
 document.querySelector("#load").classList.add("ldio-633k9nv1itq");
 
